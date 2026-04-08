@@ -179,7 +179,22 @@ button:disabled {
             font-size: 20px; box-shadow: var(--pip-glow); opacity: 0; transition: visibility 0.4s, opacity 0.4s linear;
         }
         .toast.show { visibility: visible; opacity: 1; }
-
+/* --- V.A.T.S. Hover Tooltip --- */
+#vats-tooltip {
+    position: fixed;
+    background: var(--pip-panel-solid);
+    border: 2px solid var(--pip-color);
+    color: var(--pip-color);
+    padding: 10px;
+    font-family: 'VT323', monospace;
+    text-transform: uppercase;
+    box-shadow: var(--pip-glow);
+    pointer-events: none; /* Prevents the tooltip from blocking your clicks */
+    z-index: 10000;
+    display: none;
+    font-size: 18px;
+    line-height: 1.2;
+}
         /* --- Map Settings (Filter Removed for Accurate Colors) --- */
         .map {
             position: absolute; left: 260px; right: 260px; top: 0; bottom: 150px;
@@ -357,7 +372,7 @@ button:disabled {
     
     <div id="start-modal" class="overlay">
         <div class="start-modal">
-            <h1 class="title">ROBCO OS v1.3</h1>
+            <h1 class="title">ROBCO OS v1.5</h1>
             
             <div class="form-group">
                 <label for="chosen-theme">Loaded Holotape (Theme)</label>
@@ -372,11 +387,23 @@ button:disabled {
                 <input type="text" id="chosen-leader" value="Courier Six">
             </div>
             
-            <div class="form-group">
-                <label for="chosen-country">Primary Faction</label>
-                <input type="text" id="chosen-country" value="New California Republic">
+<div class="form-group" style="display: flex; gap: 10px;">
+                <div style="flex: 2;">
+                    <label for="chosen-country">Primary Faction</label>
+                    <input type="text" id="chosen-country" value="New California Republic">
+                </div>
+                <div style="flex: 1;">
+                    <label for="chosen-color">Color</label>
+                    <select id="chosen-color" style="cursor: pointer; padding: 6px;">
+                        <option value="#0088ff" style="color: #0088ff;">BLUE</option>
+                        <option value="#ff003c" style="color: #ff003c;">RED</option>
+                        <option value="#ffaa00" style="color: #ffaa00;">ORANGE</option>
+                        <option value="#ff00ff" style="color: #ff00ff;">PURPLE</option>
+                        <option value="#00ff00" style="color: #00ff00;">GREEN</option>
+                        <option value="#ffff00" style="color: #ffff00;">YELLOW</option>
+                    </select>
+                </div>
             </div>
-            
 
 <div class="form-group">
                 <label for="chosen-difficulty">Simulation Difficulty</label>
@@ -387,7 +414,7 @@ button:disabled {
                 </select>
             </div>
 
-            <div class="form-group" style="display: flex; gap: 10px; margin-bottom: 25px;">
+<div class="form-group" style="display: flex; gap: 10px; margin-bottom: 15px;">
                 <div style="flex: 1; text-align: center;">
                     <input type="checkbox" id="opt-radstorms" style="width: auto; cursor: pointer;"> 
                     <label style="display:inline; font-size: 14px;" for="opt-radstorms">RADSTORMS</label>
@@ -396,6 +423,11 @@ button:disabled {
                     <input type="checkbox" id="opt-horrors" style="width: auto; cursor: pointer;"> 
                     <label style="display:inline; font-size: 14px;" for="opt-horrors">WILD GHOULS</label>
                 </div>
+            </div>
+            
+            <div class="form-group" style="text-align: center; margin-bottom: 25px;">
+                <input type="checkbox" id="opt-flat-trade" style="width: auto; cursor: pointer;"> 
+                <label style="display:inline; font-size: 14px;" for="opt-flat-trade">FIXED REINFORCEMENTS (ALWAYS 3 TROOPS)</label>
             </div>
 
             <button id="submit-name">BOOT SEQUENCE...</button>
@@ -422,7 +454,7 @@ button:disabled {
     
 <div class="player-panel">
         <div>
-            <h1>ROBCO STRAT-COM<span class="title-version">v1.3</span></h1>
+            <h1>ROBCO STRAT-COM<span class="title-version">v1.5</span></h1>
             <div class="player-name"></div>
             <div class="player-country"></div>
             
@@ -829,65 +861,58 @@ button:disabled {
     </div> 
 
 <div id="help-modal" class="overlay" style="display: none; z-index: 10000;">
-    <div class="start-modal content help-modal-content" style="padding: 30px; max-width: 850px; width: 95%;">
-        <h2 style="text-align: center; color: var(--pip-color); border-bottom: 2px solid var(--pip-color); padding-bottom: 10px;">ROBCO OS: SURVIVAL GUIDE</h2>
+    <div class="start-modal content help-modal-content" style="padding: 20px 30px; max-width: 850px; width: 95%;">
+        <h2 style="text-align: center; color: var(--pip-color); border-bottom: 2px solid var(--pip-color); padding-bottom: 5px; margin-top: 0;">ROBCO OS: SURVIVAL GUIDE</h2>
         
-        <p><b>OBJECTIVE:</b> Eliminate all rival factions and conquer all 42 territories to establish total wasteland dominance.</p>
+        <p style="text-align: center; font-size: 16px; margin-bottom: 15px;"><b>OBJECTIVE:</b> Wipe out all rival factions and take over all 42 territories in the wasteland!</p>
         
-        <div style="display: flex; gap: 20px; margin-bottom: 15px;">
+        <div style="display: flex; gap: 20px; text-align: left; font-size: 14px; line-height: 1.3;">
             <div style="flex: 1;">
-                <p><b>PHASE 1: DEPLOY</b><br>
-                Click your territories to deploy reserve troops. Hold SHIFT to place all at once.</p>
+                <p style="margin-bottom: 8px;"><b>1. DEPLOY:</b> Place your reserve troops onto territories you already own. Hold SHIFT to place them all at once.</p>
                 
-                <p><b>PHASE 2: ATTACK (V.A.T.S.)</b><br>
-                Select a staging territory, then click an adjacent enemy. V.A.T.S. targeting calculates probability matrices for the assault.</p>
+                <p style="margin-bottom: 8px;"><b>2. ATTACK:</b> Pick one of your territories, then click a connected enemy to attack! V.A.T.S. will show you the odds. If you win, you get to choose how many troops to move into the newly conquered land.</p>
                 
-                <p><b>PHASE 3: AWAITING DEPLOYMENT</b><br>
-                Also known as the Maneuver phase. Move troops between connected territories you own. You are allowed one maneuver per turn.</p>
+                <p style="margin-bottom: 8px;"><b>3. MANEUVER:</b> Once per turn, you can move troops between your own connected territories to reinforce your borders.</p>
+                
+                <p style="margin-bottom: 8px;"><b>BOTTLE CAPS:</b> Taking over land earns you Bottle Caps. Trade in 3 matching Caps (or 1 of each kind) to hire more troops. Wipe out an enemy faction entirely to steal all their Caps!</p>
+                
+                <p style="margin-bottom: 0;"><b>FIXED REINFORCEMENTS:</b> By default, trading in Caps gives you more and more troops as the game goes on. Check this box on the start screen if you want trades to ALWAYS give exactly 3 troops instead.</p>
             </div>
-            <div style="flex: 1; border-left: 1px solid var(--pip-color); padding-left: 20px;">
-                <p><b>HP & AP GAUGES</b><br>
-                The <b>HP Bar</b> represents your territorial health compared to the rest of the map. The <b>AP Bar</b> tracks your Action Points; it will deplete as you run out of legal moves or reinforcements.</p>
-
-                <p><b>TURBO MODE</b><br>
-                Toggle the switch to bypass V.A.T.S. animations and significantly increase AI processing speed for faster gameplay.</p>
+            
+            <div style="flex: 1; border-left: 1px dashed var(--pip-color); padding-left: 20px;">
+                <p style="margin-bottom: 8px;"><b>UI GAUGES:</b> The HP Bar shows how much of the wasteland you control. The AP Bar shows your Action Points, which drain as you run out of moves or troops.</p>
                 
-                <p><b>RADSTORMS & WILD GHOULS</b><br>
-                Optional hazards. Radstorms kill 10-25% of troops in affected zones after a 2-day warning. Wild Ghouls are neutral threats with a 15% defensive bonus.</p>
+                <p style="margin-bottom: 8px;"><b>RADIO:</b> Click the <b>RADIO</b> tab at the bottom to listen to wasteland broadcasts. Turn it OFF and ON to skip songs (expect a few seconds of static in between!).</p>
+                
+                <p style="margin-bottom: 8px;"><b>TURBO MODE:</b> Turn this on to skip the V.A.T.S. animations and make the AI take its turns much faster.</p>
+                
+                <p style="margin-bottom: 8px;"><b>HAZARD - RADSTORMS:</b> Watch the skies! Radstorms give a short warning before wiping out 10-25% of the troops caught in the blast zone.</p>
+                
+                <p style="margin-bottom: 0;"><b>HAZARD - WILD GHOULS:</b> Unclaimed territories are filled with feral ghouls. They fight back, and they will slowly multiply depending on your difficulty setting.</p>
             </div>
         </div>
 
-        <p style="border-top: 1px dashed var(--pip-color); padding-top: 15px;">
-            <b>RADIO BROADCASTS:</b><br>
-            Click the <B>RADIO</B> tab in the bottom navigation to tune into local wasteland frequencies. Cycle the power (turn OFF, then ON) to skip tracks. Signals are unstable, so expect a 5-second delay between broadcasts. Track data is integrated directly into your combat log.
-        </p>
+        <button id="close-help-btn" style="margin-top: 15px; width: 100%; padding: 8px;">CLOSE MANUAL</button>
 
-        <p style="border-top: 1px dashed var(--pip-color); padding-top: 15px;">
-            <b>CAPS (CARDS):</b><br>
-            Conquering territory earns Bottle Caps. To trade for reinforcements, select 3: either <b>three of the same kind</b> or <b>one of each unique kind</b>. The "Stash" button will pulse and update when a valid trade is ready.
-        </p>
-
-        <button id="close-help-btn" style="margin-top: 25px; width: 100%;">CLOSE MANUAL</button>
-
-<div class="manual-footer" style="font-family: 'VT323', monospace; text-transform: uppercase; text-align: center; margin-top: 30px; opacity: 0.7; font-size: 14px; line-height: 1.4;">
-
-            <p style="margin-top: 10px;">To download this simulation, simply save this webpage (Ctrl+S or Cmd+S) as a single HTML file.<br>
-            <span style="font-size: 12px; opacity: 0.8;">*Note: Radio broadcast MP3 files are not included in the page save and must be stored locally.</span></p>
-
-            <p>Modified simulation based off the HTML5 Canvas Risk Game by <a href="https://github.com/vvedanta" target="_blank" class="download-link" style="color: var(--pip-color);">Vinayak Vedantam</a>.
-
-            This project is an independent, fan-made creation and is not affiliated with, endorsed by, or sponsored by Bethesda Softworks, Bethesda Game Studios, or any entities associated with the Fallout franchise.</p>
+        <div class="manual-footer" style="font-family: 'VT323', monospace; text-transform: uppercase; text-align: center; margin-top: 15px; opacity: 0.8; font-size: 13px; line-height: 1.3;">
+            <p style="margin-bottom: 10px; border-bottom: 1px solid var(--pip-color); padding-bottom: 10px;">
+                <b>Like this game? </b> Support him by checking out his book <a href="https://www.amazon.com/SurvivalSOS-Fundamentals-Survival-Joseph-Howard/dp/B09TZ4WXZC" target="_blank" class="download-link" style="color: var(--pip-color); font-weight: bold; text-shadow: var(--pip-glow);">SurvivalSOS: Fundamentals of Survival</a>.
+            </p>
+            <p style="margin-bottom: 5px;">To download: Save this webpage (Ctrl+S) as a single HTML file. <span style="font-size: 11px; opacity: 0.7;">(music not included)</span></p>
+            <p style="margin-bottom: 5px;">Check for Updates: <a href="https://github.com/threememories/FalloutRisk" target="_blank" class="download-link" style="color: var(--pip-color);">http://github.com/threememories/FalloutRisk</a>. <a href="mailto:threememories@yahoo.com" class="download-link" style="color: var(--pip-color);">Have suggetions or found a bug? Let me know</a></a>.</p>
+            <p style="margin-bottom: 5px;">Modified from the HTML5 Canvas Risk Game by <a href="https://github.com/vvedanta" target="_blank" class="download-link" style="color: var(--pip-color);">Vinayak Vedantam</a>.</p>
+            <p style="font-size: 11px; opacity: 0.7; margin-top: 10px; margin-bottom: 0;">This is an independent, fan-made project not affiliated with or endorsed by <a href="https://fallout.bethesda.net/en" target="_blank" class="download-link" style="color: var(--pip-color);">Bethesda Softworks</a>.</p>
         </div>
     </div>
-</div>    
-<div class="info">
-       <div class="info-one"><div class="leader"></div><div class="country"></div><div>Caps Yield: <span class="income"></span></div><div class="bar"></div></div> 
-       <div class="info-two"><div class="leader"></div><div class="country"></div><div>Caps Yield: <span class="income"></span></div><div class="bar"></div></div> 
-       <div class="info-three"><div class="leader"></div><div class="country"></div><div>Caps Yield: <span class="income"></span></div><div class="bar"></div></div> 
-       <div class="info-four"><div class="leader"></div><div class="country"></div><div>Caps Yield: <span class="income"></span></div><div class="bar"></div></div> 
-       <div class="info-five"><div class="leader"></div><div class="country"></div><div>Caps Yield: <span class="income"></span></div><div class="bar"></div></div> 
-       <div class="info-six"><div class="leader"></div><div class="country"></div><div>Caps Yield: <span class="income"></span></div><div class="bar"></div></div>
-       <div class="info-seven"><div class="leader"></div><div class="country"></div><div>Caps Yield: <span class="income"></span></div><div class="bar"></div></div>
+</div>
+</div><div class="info">
+       <div class="info-one"><div class="leader"></div><div class="country"></div><div>Reinforcements: <span class="income"></span></div><div class="bar"></div></div> 
+       <div class="info-two"><div class="leader"></div><div class="country"></div><div>Reinforcements: <span class="income"></span></div><div class="bar"></div></div> 
+       <div class="info-three"><div class="leader"></div><div class="country"></div><div>Reinforcements: <span class="income"></span></div><div class="bar"></div></div> 
+       <div class="info-four"><div class="leader"></div><div class="country"></div><div>Reinforcements: <span class="income"></span></div><div class="bar"></div></div> 
+       <div class="info-five"><div class="leader"></div><div class="country"></div><div>Reinforcements: <span class="income"></span></div><div class="bar"></div></div> 
+       <div class="info-six"><div class="leader"></div><div class="country"></div><div>Reinforcements: <span class="income"></span></div><div class="bar"></div></div>
+       <div class="info-seven"><div class="leader"></div><div class="country"></div><div>Reinforcements: <span class="income"></span></div><div class="bar"></div></div>
        
        <button id="help-btn" class="restart" style="margin-top: auto;">Survival Guide</button>
        <button id="restart" class="restart" style="margin-top: 10px;">Reboot Game</button>
@@ -1034,12 +1059,21 @@ function generateDeck() {
     countries.forEach((country, index) => {
         deck.push({ country: country.name, type: cardTypes[index % 3] });
     });
-    deck.push({ country: "Wild", type: "Wild" });
-    deck.push({ country: "Wild", type: "Wild" });
+    
+    // Injects 8 Wild Caps to bring the total pool to exactly 50
+    for (let i = 0; i < 8; i++) {
+        deck.push({ country: "Wild", type: "Wild" });
+    }
     shuffle(deck);
 }
 
 function getTradeBonus() {
+    // Check if the fixed trade option was selected
+    if (Gamestate.flatTrade) {
+        return 3; 
+    }
+    
+    // Default escalating Risk trade rules
     tradeCount++;
     if (tradeCount <= 5) return 2 + (tradeCount * 2); 
     return 15 + ((tradeCount - 6) * 5); 
@@ -1064,10 +1098,74 @@ const areas = Array.from(document.getElementsByClassName('area'));
 const bar = Array.from(document.getElementsByClassName('bar'));
 const map = document.querySelector('svg');
 
+// --- Initialize V.A.T.S. Tooltip Element ---
+const vatsTooltip = document.createElement('div');
+vatsTooltip.id = 'vats-tooltip';
+document.body.appendChild(vatsTooltip);
+
+map.addEventListener('mousemove', (e) => {
+    // Only show V.A.T.S. if we are in Battle phase and have a staging territory selected
+    if (Gamestate.stage !== "Battle" || !Gamestate.prevCountry || Gamestate.aiTurn) {
+        vatsTooltip.style.display = "none";
+        return;
+    }
+
+    let targetId = e.target.id;
+    let targetCountry = Gamestate.countries.find(c => c.name === targetId);
+
+    // If hovering over a valid enemy neighbor
+    if (targetCountry && Gamestate.prevCountry.neighbours.includes(targetCountry.name) && targetCountry.owner !== Gamestate.player.name && Gamestate.prevCountry.army > 1) {
+        
+        // 1. Get the per-troop combat odds
+        let baseChance = 0.50;
+        if (Gamestate.difficulty === "Easy") baseChance = 0.60;
+        if (Gamestate.difficulty === "Hard") baseChance = 0.40;
+
+        let isNeutral = Gamestate.players.find(p => p.name === targetCountry.owner).isNeutral;
+        if (isNeutral) baseChance -= 0.15;
+
+        // 2. Calculate complete battle victory probability (Gambler's Ruin Algorithm)
+        let a = Gamestate.prevCountry.army - 1; // Troops available to attack
+        let d = targetCountry.army;             // Troops defending
+        let winProb = 0;
+        
+        if (baseChance === 0.5) {
+            winProb = a / (a + d);
+        } else {
+            let q = 1 - baseChance;
+            let ratio = q / baseChance;
+            winProb = (1 - Math.pow(ratio, a)) / (1 - Math.pow(ratio, a + d));
+        }
+        
+        let chancePercent = Math.round(winProb * 100);
+        
+        // 3. Authentic Fallout Cap (V.A.T.S. never guarantees 100%)
+        if (chancePercent > 95) chancePercent = 95;
+        if (chancePercent < 1) chancePercent = 1;
+
+        vatsTooltip.innerHTML = `
+            <div style="border-bottom: 1px solid var(--pip-color); margin-bottom: 5px;">V.A.T.S. TARGETING</div>
+            TARGET: ${targetCountry.name}<br>
+            DEFENDERS: ${targetCountry.army}<br>
+            WIN CHANCE: ${chancePercent}%
+        `;
+        
+        // Position tooltip slightly offset from the mouse pointer
+        vatsTooltip.style.left = (e.clientX + 20) + "px";
+        vatsTooltip.style.top = (e.clientY + 20) + "px";
+        vatsTooltip.style.display = "block";
+    } else {
+        vatsTooltip.style.display = "none";
+    }
+});
+// Hide tooltip if the mouse leaves the map area
+map.addEventListener('mouseleave', () => { vatsTooltip.style.display = "none"; });
+
 const modal = document.querySelector('#start-modal');
 const reserveDisplay = document.querySelector('#reserve');
 const chosenLeader = document.querySelector('#chosen-leader');
 const chosenCountry = document.querySelector('#chosen-country');
+const chosenColor = document.querySelector('#chosen-color'); // <-- NEW LINE
 const submitName = document.querySelector('#submit-name');
 const winModal = document.querySelector('#win-modal');
 const winMessage = document.querySelector('.win-message');
@@ -1298,7 +1396,8 @@ Gamestate.start = async function(){
 
     let optRadstorms = document.getElementById('opt-radstorms') && document.getElementById('opt-radstorms').checked;
     let optHorrors = document.getElementById('opt-horrors') && document.getElementById('opt-horrors').checked;
-    this.hazardsEnabled = optRadstorms;
+this.flatTrade = document.getElementById('opt-flat-trade') && document.getElementById('opt-flat-trade').checked; // NEW SETTING    
+this.hazardsEnabled = optRadstorms;
     
     this.radstorm = { state: 'none', timer: 0, cooldown: Math.floor(Math.random() * 11) + 5, areas: [] };
 
@@ -1352,7 +1451,22 @@ Gamestate.start = async function(){
         if (playerName) playerName.textContent = chosenLeader.value;
         if (playerCountry) playerCountry.textContent = chosenCountry.value;
     }
-    
+// --- SET CUSTOM FACTION COLOR & PREVENT DUPLICATES ---
+    if (chosenColor) {
+        let selectedHex = chosenColor.value;
+        let defaultPlayerColor = this.players[0].color; // Save Player 1's default starting color
+        
+        // Scan the AI players to see if anyone is using the color you just picked
+        let colorConflictAI = this.players.find((p, index) => index !== 0 && p.color === selectedHex);
+        
+        if (colorConflictAI) {
+            // Give the AI your default color so they aren't left blank
+            colorConflictAI.color = defaultPlayerColor;
+        }
+
+        // Finally, assign your chosen color to your faction
+        this.players[0].color = selectedHex;
+    }
     generateDeck();
     tradeCount = 0;
     this.players.forEach(p => { p.cards = []; p.conqueredThisTurn = false; });
@@ -1457,33 +1571,56 @@ Gamestate.updateInfo = function(){
 
     let sortedPlayers = [...this.players].sort((a, b) => b.army - a.army);
 
-    this.players.forEach((player, i) => {
-        let infoBox = infoName[i] ? infoName[i].parentElement : null;
-        if (!infoBox) return;
+this.players.forEach((player, i) => {
+            let infoBox = infoName[i] ? infoName[i].parentElement : null;
+            if (!infoBox) return;
 
-        if (player.alive) {
-            if (player.isNeutral) {
-                if (infoIncome[i]) infoIncome[i].parentElement.style.display = "none";
-            } else {
+            // --- DYNAMIC CAPS DISPLAY ---
+            // This creates a new line specifically for Caps right under Reinforcements
+            let capsDiv = infoBox.querySelector('.caps-display');
+            if (!capsDiv) {
+                capsDiv = document.createElement('div');
+                capsDiv.className = 'caps-display';
+                capsDiv.style.color = 'var(--pip-color)';
+                capsDiv.style.fontSize = '14px';
+                capsDiv.style.marginTop = '2px';
                 if (infoIncome[i]) {
-                    infoIncome[i].innerHTML = player.bonus;
-                    infoIncome[i].parentElement.style.display = "block";
+                    infoIncome[i].parentElement.after(capsDiv); 
                 }
             }
-            if (bar[i]) bar[i].style.width = (player.army / totalArmy) * 230 + 'px';
-        } else {
-            if (infoIncome[i]) {
-                infoIncome[i].innerHTML = "OFFLINE";
-                infoIncome[i].parentElement.style.display = "block";
+
+            if (player.alive) {
+                // Restore Leader and Faction texts properly
+                if (infoLeader[i]) infoLeader[i].innerHTML = player.name;
+                if (infoName[i]) infoName[i].innerHTML = player.country;
+
+                if (player.isNeutral) {
+                    if (infoIncome[i]) infoIncome[i].parentElement.style.display = "none";
+                    capsDiv.style.display = "none"; 
+                } else {
+                    if (infoIncome[i]) {
+                        infoIncome[i].innerHTML = player.bonus;
+                        infoIncome[i].parentElement.style.display = "block";
+                    }
+                    capsDiv.innerHTML = `Bottle Caps: <span style="font-weight:bold; text-shadow: var(--pip-glow); font-size:16px;">${player.cards.length}</span>`;
+                    capsDiv.style.display = "block";
+                }
+                if (bar[i]) bar[i].style.width = (player.army / totalArmy) * 230 + 'px';
+            } else {
+                if (infoIncome[i]) {
+                    infoIncome[i].innerHTML = "OFFLINE";
+                    infoIncome[i].parentElement.style.display = "block";
+                }
+                if (infoLeader[i]) infoLeader[i].innerHTML = `<del>${player.name}</del>`;
+                if (infoName[i]) infoName[i].innerHTML = `<del>${player.country}</del>`;
+                capsDiv.style.display = "none"; 
+                if (bar[i]) bar[i].style.width = "0px";
             }
-            if (bar[i]) bar[i].style.width = "0px";
-        }
-        
-        let rank = sortedPlayers.findIndex(p => p.name === player.name);
-        infoBox.style.display = "block"; 
-        infoBox.style.order = rank; 
-    });
-    
+            
+            let rank = sortedPlayers.findIndex(p => p.name === player.name);
+            infoBox.style.display = "block"; 
+            infoBox.style.order = rank; 
+        });    
     if (this.players.length === 6 && infoName[6] && infoName[6].parentElement) {
         infoName[6].parentElement.style.display = "none";
     }
@@ -1860,8 +1997,10 @@ Gamestate.handleEndTurn = async function(){
         } 
     }
     
-    if (this.player.conqueredThisTurn && deck.length > 0) {
-        this.player.cards.push(deck.pop());
+if (this.player.conqueredThisTurn) {
+        // If the 50-cap deck empties, forge a new wild cap instead of crashing
+        let newCap = deck.length > 0 ? deck.pop() : { country: "Wasteland Salvage", type: "Wild" };
+        this.player.cards.push(newCap);
         this.updateInfo();
         if (this.getBestTrade(this.player.cards)) {
             await this.logAction("STASH FULL: Enough Caps collected to hire more troops.");
@@ -2012,8 +2151,21 @@ Gamestate.maneuver = function(e){
                         this.maneuverSource = this.prevCountry.name;
                         this.maneuverDest = country.name;
 
-                        let moveAmount = e.shiftKey ? (this.prevCountry.army - 1) : 1;
+let maxMove = this.prevCountry.army - 1;
+                        let moveAmount = 1;
                         
+                        if (e.shiftKey) {
+                            moveAmount = maxMove; // Still keep Shift as a shortcut for "Move All"
+                        } else {
+                            let input = prompt(`MANEUVER: How many troops to move to ${country.name}? (1 to ${maxMove})`, maxMove);
+                            if (input === null) return; // User clicked Cancel
+                            
+                            moveAmount = parseInt(input);
+                            if (isNaN(moveAmount) || moveAmount < 1 || moveAmount > maxMove) {
+                                Gamestate.showToast("Invalid troop transfer amount.", "red");
+                                return; // Abort if they type letters or invalid numbers
+                            }
+                        }                        
                         country.army += moveAmount;
                         this.prevCountry.army -= moveAmount;
 
@@ -2069,8 +2221,44 @@ Gamestate.aiMove = async function(){
         if (infoName[i-1]) infoName[i-1].parentElement.classList.remove('highlight'); 
         if(this.players[i].alive){
             
-            if (this.players[i].isNeutral) {
-                continue; 
+if (this.players[i].isNeutral) {
+                // --- NEUTRAL THREAT: HORDE MULTIPLICATION ---
+                if (this.players[i].name === "Wasteland Horrors") {
+                    let ownedAreas = this.countries.filter(c => c.owner === this.players[i].name);
+                    
+                    if (ownedAreas.length > 0) {
+                        let totalSpawned = 0;
+                        ownedAreas.forEach(c => {
+                            if (this.difficulty === "Hard") {
+                                // Hard: 2 to 6 units added to ALL Horror territories
+                                let spawn = Math.floor(Math.random() * 5) + 2; 
+                                c.army += spawn;
+                                this.players[i].army += spawn;
+                                totalSpawned += spawn;
+                            } else if (this.difficulty === "Normal") {
+                                // Normal: 1 to 3 units added to SOME Horror territories (approx 30% chance per territory)
+                                if (Math.random() < 0.30) {
+                                    let spawn = Math.floor(Math.random() * 3) + 1;
+                                    c.army += spawn;
+                                    this.players[i].army += spawn;
+                                    totalSpawned += spawn;
+                                }
+                            }
+                            
+                            // Update the specific territory number on the map
+                            let areaOnMap = document.getElementById(c.name);
+                            if (areaOnMap && areaOnMap.nextElementSibling) areaOnMap.nextElementSibling.textContent = c.army;
+                        });
+
+                        // Log the infestation if any units spawned
+                        if (totalSpawned > 0 && Gamestate.logAction) {
+                            Gamestate.logAction(`[ WARNING ] The Wasteland Horrors are multiplying... (+${totalSpawned} hostiles detected).`, true);
+                        }
+                    }
+                }
+                
+                this.updateInfo();
+                continue; // Move to the next player
             }
 
             if (infoName[i]) infoName[i].parentElement.classList.add('highlight')
@@ -2141,8 +2329,9 @@ Gamestate.aiMove = async function(){
 
             this.aiManeuver(i);
 
-            if (this.players[i].conqueredThisTurn && deck.length > 0) {
-                this.players[i].cards.push(deck.pop());
+if (this.players[i].conqueredThisTurn) {
+                let newCap = deck.length > 0 ? deck.pop() : { country: "Wasteland Salvage", type: "Wild" };
+                this.players[i].cards.push(newCap);
                 this.players[i].conqueredThisTurn = false;
             }
 
@@ -2258,7 +2447,36 @@ Gamestate.battle = async function(country, opponent, player, i){
         opponent.color = player.color;
         player.areas.push(opponent.name);
         
-        let movedTroops = Math.max(1, Math.floor(country.army / 2));
+        // --- POST-ATTACK MOVEMENT SELECTION ---
+        let maxMove = country.army - 1;
+        let minMove = 1; 
+        let movedTroops = minMove;
+
+        if (player === this.player && maxMove > minMove) {
+             let validInput = false;
+             while (!validInput) {
+                 let input = prompt(`VICTORY! How many troops to move into ${opponent.name}? (${minMove} to ${maxMove})`, maxMove);
+                 
+                 if (input === null) {
+                     // If they hit cancel, default to the maximum allowable to prevent a game-freeze
+                     movedTroops = maxMove;
+                     validInput = true;
+                 } else {
+                     let parsed = parseInt(input);
+                     if (!isNaN(parsed) && parsed >= minMove && parsed <= maxMove) {
+                         movedTroops = parsed;
+                         validInput = true;
+                     } else {
+                         // The warning alert
+                         alert(`WARNING: Insufficient garrison logic. You must move between ${minMove} and ${maxMove} troops.`);
+                     }
+                 }
+             }
+        } else if (player !== this.player) {
+             // AI automatically moves maximum allowable troops to the new frontline
+             movedTroops = maxMove; 
+        }
+
         opponent.army = movedTroops;
         country.army -= movedTroops;
 
@@ -2266,10 +2484,29 @@ Gamestate.battle = async function(country, opponent, player, i){
         if (defender && defender.nextElementSibling) defender.nextElementSibling.textContent = opponent.army;
         if (attacker && attacker.nextElementSibling) attacker.nextElementSibling.textContent = country.army;
         
+        // --- PLAYER ELIMINATION & CAP STEALING ---
         if(opp.areas.length === 0){
             opp.alive = false;
             let index = this.players.indexOf(opp)
             if (infoName[index]) infoName[index].parentElement.classList.add('defeated');
+            
+            // Steal their caps
+            if (opp.cards.length > 0) {
+                player.cards.push(...opp.cards);
+                
+                const lootFlavors = [
+                    `pried a stash of Caps from ${originalOwner}'s cold, dead hands.`,
+                    `raided ${originalOwner}'s footlocker and secured their funds.`,
+                    `hacked ${originalOwner}'s personal terminal and drained their Cap reserves.`,
+                    `shook down the remaining survivors for every last Bottle Cap.`
+                ];
+                let flavorText = lootFlavors[Math.floor(Math.random() * lootFlavors.length)];
+                
+                if (Gamestate.logAction) {
+                    Gamestate.logAction(`[ LOOT ] ${player.name} ${flavorText} (+${opp.cards.length} Caps)`, true);
+                }
+                opp.cards = [];
+            }
         }
     }
         
@@ -2302,9 +2539,8 @@ Gamestate.battle = async function(country, opponent, player, i){
     if(player.areas.length === 42){
         this.gameOver = true;
         this.win(player);
-    }    
+    }   
 }
-
 Gamestate.init();
 
 // --- FALL RADIO BROADCAST SYSTEM ---
