@@ -80,38 +80,43 @@ Because the game is completely self-contained, you don't need to install anythin
 
 **Disclaimer:** This is an independent, fan-made project. It is not affiliated with, endorsed by, or sponsored by Bethesda Softworks, Bethesda Game Studios, or any entities associated with the Fallout franchise.
 
+---
 
+## Change Log
 
+**v1.6 [SECURITY & UI PROTOCOLS]**
 
-CHANGE LOG
+- Anti-Hacking Patch: Implemented advanced input sanitization to block malicious code injection at the boot terminal.
+- OS Version History: Initialized scrolling telemetry window to track simulation patch notes.
 
-v1.6 [SECURITY & UI PROTOCOLS]
-Anti-Hacking Patch: Implemented advanced input sanitization to block malicious code injection at the boot terminal.
-OS Version History: Initialized scrolling telemetry window to track simulation patch notes.
+**v1.5 [SYSTEMS UPGRADE]**
 
-v1.5 [SYSTEMS UPGRADE]
-V.A.T.S. Upgrade: Hover targeting now utilizes Gambler's Ruin algorithms to calculate total victory probability (capped at 95%).
-Customization: Faction color override matrix added to Boot Sequence.
-Cap Economy: Reserve pool expanded to 50, featuring dynamic "Wasteland Salvage" forging.
-UI Refinement: Overhauled the Survival Guide into a compact, tactical layout.
+- V.A.T.S. Upgrade: Hover targeting now utilizes Gambler's Ruin algorithms to calculate total victory probability (capped at 95%).
+- Customization: Faction color override matrix added to Boot Sequence.
+- Cap Economy: Reserve pool expanded to 50, featuring dynamic "Wasteland Salvage" forging.
+- UI Refinement: Overhauled the Survival Guide into a compact, tactical layout.
 
-v1.4 [COMBAT & LOOT PROTOCOLS]
-Tactical Routing: Commanders may now dictate exact troop garrison sizes post-victory.
-Wasteland Justice: Eradicating a rival faction now instantly transfers their entire Cap stash to your inventory.
-Neutral Threat: Feral Ghouls now dynamically multiply based on active simulation difficulty.
-Logistics: "Fixed Reinforcements" (Always 3) trade rule added to boot options.
+**v1.4 [COMBAT & LOOT PROTOCOLS]**
 
-v1.3 [ENVIRONMENTAL HAZARDS]
-Meteorology: Radstorms added to the simulation.
-Fauna: Wild Ghouls (Neutral Threat) optional hazard integrated into the map.
-Comms: Pip-Boy Wasteland Radio frequency scanner initialized.
+- Tactical Routing: Commanders may now dictate exact troop garrison sizes post-victory.
+- Wasteland Justice: Eradicating a rival faction now instantly transfers their entire Cap stash to your inventory.
+- Neutral Threat: Feral Ghouls now dynamically multiply based on active simulation difficulty.
+- Logistics: "Fixed Reinforcements" (Always 3) trade rule added to boot options.
 
-v1.2 [HOLOTAPE INTERFACE]
-Telemetry: Vault-Tec Action Log implemented for real-time combat and event tracking.
-Immersion: Randomized wasteland encounter logs integrated into the turn cycle.
-System Clock: Holiday protocol initialized to trigger date-specific wasteland encounters.
-UI: Dynamic HP (Territorial Health) and AP (Action Point) tracking gauges added to the Commander's dashboard.
-Performance: Turbo Mode toggle added to bypass V.A.T.S. rendering for accelerated AI processing.
+**v1.3 [ENVIRONMENTAL HAZARDS]**
 
-v1.1 [PIP-BOY SCREEN AND UI]
-Themes: Capital Wasteland and Mojave holographic overlays loaded.
+- Meteorology: Radstorms added to the simulation.
+- Fauna: Wild Ghouls (Neutral Threat) optional hazard integrated into the map.
+- Comms: Pip-Boy Wasteland Radio frequency scanner initialized.
+
+**v1.2 [HOLOTAPE INTERFACE]**
+
+- Telemetry: Vault-Tec Action Log implemented for real-time combat and event tracking.
+- Immersion: Randomized wasteland encounter logs integrated into the turn cycle.
+- System Clock: Holiday protocol initialized to trigger date-specific wasteland encounters.
+- UI: Dynamic HP (Territorial Health) and AP (Action Point) tracking gauges added to the Commander's dashboard.
+- Performance: Turbo Mode toggle added to bypass V.A.T.S. rendering for accelerated AI processing.
+
+**v1.1 [PIP-BOY SCREEN AND UI]**
+
+- Themes: Capital Wasteland and Mojave holographic overlays loaded.
