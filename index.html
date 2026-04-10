@@ -365,14 +365,58 @@ button:disabled {
         0 0 20px var(--pip-color) !important; /* Stacks 3 layers of glow for maximum brightness */
     opacity: 1 !important;
 }
-    </style>
+
+/* --- ROBCO UPDATE TICKER --- */
+.ticker-window {
+    height: 250px;
+    overflow: hidden;
+    position: relative;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px inset var(--pip-color);
+    margin-top: 15px;
+    padding: 10px;
+    text-align: left;
+    box-shadow: inset 0 0 15px rgba(0,0,0,0.8);
+}
+
+.ticker-text {
+    position: absolute;
+    width: 95%;
+    /* 35s is the speed. Lower = faster, Higher = slower */
+    animation: scrollTicker 35s linear infinite; 
+}
+
+/* Pause the scrolling when the mouse hovers over it */
+.ticker-window:hover .ticker-text {
+    animation-play-state: paused;
+}
+
+@keyframes scrollTicker {
+    0% { top: 100%; }
+    100% { top: -200%; }
+}
+
+.patch-version { 
+    /* color: #ffffff; // <-- THE PATCH: Remove hardcoded white color */
+    font-weight: bold; 
+    text-shadow: 0 0 5px var(--pip-color); /* <-- THE PATCH: Apply theme-consistent glow */
+    margin-top: 20px; 
+    border-bottom: 1px dashed var(--pip-color);
+    display: inline-block;
+}
+.patch-note { 
+    margin-bottom: 8px; 
+    font-size: 15px; 
+    padding-left: 10px;
+    border-left: 2px solid var(--pip-color);
+}    </style>
 </head>
 <body>
 <div class="container">
     
     <div id="start-modal" class="overlay">
         <div class="start-modal">
-            <h1 class="title">ROBCO OS v1.5</h1>
+            <h1 class="title">ROBCO OS v1.6</h1>
             
             <div class="form-group">
                 <label for="chosen-theme">Loaded Holotape (Theme)</label>
@@ -454,7 +498,7 @@ button:disabled {
     
 <div class="player-panel">
         <div>
-            <h1>ROBCO STRAT-COM<span class="title-version">v1.5</span></h1>
+            <h1>ROBCO STRAT-COM<span class="title-version">v1.6</span></h1>
             <div class="player-name"></div>
             <div class="player-country"></div>
             
@@ -894,18 +938,83 @@ button:disabled {
 
         <button id="close-help-btn" style="margin-top: 15px; width: 100%; padding: 8px;">CLOSE MANUAL</button>
 
-        <div class="manual-footer" style="font-family: 'VT323', monospace; text-transform: uppercase; text-align: center; margin-top: 15px; opacity: 0.8; font-size: 13px; line-height: 1.3;">
-            <p style="margin-bottom: 10px; border-bottom: 1px solid var(--pip-color); padding-bottom: 10px;">
-                <b>Like this game? </b> Support him by checking out his book <a href="https://www.amazon.com/SurvivalSOS-Fundamentals-Survival-Joseph-Howard/dp/B09TZ4WXZC" target="_blank" class="download-link" style="color: var(--pip-color); font-weight: bold; text-shadow: var(--pip-glow);">SurvivalSOS: Fundamentals of Survival</a>.
+<div class="manual-footer" style="font-family: 'VT323', monospace; text-transform: uppercase; text-align: center; margin-top: 15px; opacity: 0.8; font-size: 13px; line-height: 1.4;">
+            
+            <div style="border-bottom: 1px solid var(--pip-color); padding-bottom: 10px; margin-bottom: 10px;">
+                <b>Like this game?</b> Support the creator by checking out his book:<br>
+                <a href="https://www.amazon.com/SurvivalSOS-Fundamentals-Survival-Joseph-Howard/dp/B09TZ4WXZC" target="_blank" class="download-link" style="color: var(--pip-color); font-weight: bold; text-shadow: var(--pip-glow);">SurvivalSOS: Fundamentals of Survival</a>
+            </div>
+            
+            <p style="margin-bottom: 8px;">
+                <a href="https://github.com/threememories/FalloutRisk" target="_blank" class="download-link" style="color: var(--pip-color);">[ Check GitHub for Updates ]</a> &nbsp;&nbsp;|&nbsp;&nbsp; 
+                <a href="#" id="open-updates-btn" class="download-link" style="color: var(--pip-color);">[ View Version History ]</a>
             </p>
-            <p style="margin-bottom: 5px;">To download: Save this webpage (Ctrl+S) as a single HTML file. <span style="font-size: 11px; opacity: 0.7;">(music not included)</span></p>
-            <p style="margin-bottom: 5px;">Check for Updates: <a href="https://github.com/threememories/FalloutRisk" target="_blank" class="download-link" style="color: var(--pip-color);">http://github.com/threememories/FalloutRisk</a>. <a href="mailto:threememories@yahoo.com" class="download-link" style="color: var(--pip-color);">Have suggetions or found a bug? Let me know</a></a>.</p>
-            <p style="margin-bottom: 5px;">Modified from the HTML5 Canvas Risk Game by <a href="https://github.com/vvedanta" target="_blank" class="download-link" style="color: var(--pip-color);">Vinayak Vedantam</a>.</p>
-            <p style="font-size: 11px; opacity: 0.7; margin-top: 10px; margin-bottom: 0;">This is an independent, fan-made project not affiliated with or endorsed by <a href="https://fallout.bethesda.net/en" target="_blank" class="download-link" style="color: var(--pip-color);">Bethesda Softworks</a>.</p>
-        </div>
-    </div>
+            <p style="margin-bottom: 12px;">
+                <a href="mailto:threememories@yahoo.com?subject=RobCo%20OS%20Bug%20Report%20/%20Suggestion&body=Terminal%20Version:%20v1.6%0D%0A%0D%0A[Describe%20the%20bug%20or%20suggestion%20here]" class="download-link" style="color: var(--pip-color);">[ Submit Bug Report / Suggestion ]</a>
+            </p>
+            <p style="margin-bottom: 12px; font-size: 12px;">
+                To download: Save this webpage (Ctrl+S) as a single HTML file. <span style="opacity: 0.7;">(Music not included)</span>
+            </p>
+            
+            <p style="font-size: 11px; opacity: 0.7; margin-bottom: 4px;">
+                Modified from the HTML5 Canvas Risk Game by <a href="https://github.com/vvedanta" target="_blank" class="download-link" style="color: var(--pip-color);">Vinayak Vedantam</a>.
+            </p>
+            <p style="font-size: 11px; opacity: 0.7; margin-top: 0; margin-bottom: 0;">
+                Independent, fan-made project. Not affiliated with or endorsed by <a href="https://fallout.bethesda.net/en" target="_blank" class="download-link" style="color: var(--pip-color);">Bethesda Softworks</a>.
+            </p>
+            
+        </div>    </div>
 </div>
-</div><div class="info">
+<div id="updates-modal" class="overlay" style="display: none; z-index: 10001;">
+    <div class="start-modal content" style="padding: 20px 30px; width: 600px; max-width: 95%;">
+        <h2 style="color: var(--pip-color); border-bottom: 2px solid var(--pip-color); padding-bottom: 5px; margin-top: 0;">ROBCO OS: PATCH NOTES</h2>
+        <p style="font-size: 14px; opacity: 0.8; margin-bottom: 5px;">[ Hover to pause telemetry scroll ]</p>
+        
+        <div class="ticker-window">
+            <div class="ticker-text">
+                
+                <div class="patch-version">v1.6 [SECURITY & UI PROTOCOLS]</div>
+                <div class="patch-note">Anti-Hacking Patch: Implemented advanced input sanitization to block malicious code injection at the boot terminal.</div>
+                <div class="patch-note">OS Version History: Initialized scrolling telemetry window to track simulation patch notes.</div>
+
+                <div class="patch-version">v1.5 [SYSTEMS UPGRADE]</div>
+                <div class="patch-note">V.A.T.S. Upgrade: Hover targeting now utilizes Gambler's Ruin algorithms to calculate total victory probability (capped at 95%).</div>
+                <div class="patch-note">Customization: Faction color override matrix added to Boot Sequence.</div>
+                <div class="patch-note">Cap Economy: Reserve pool expanded to 50, featuring dynamic "Wasteland Salvage" forging.</div>
+                <div class="patch-note">UI Refinement: Overhauled the Survival Guide into a compact, tactical layout.</div>
+
+                <div class="patch-version">v1.4 [COMBAT & LOOT PROTOCOLS]</div>
+                <div class="patch-note">Tactical Routing: Commanders may now dictate exact troop garrison sizes post-victory.</div>
+                <div class="patch-note">Wasteland Justice: Eradicating a rival faction now instantly transfers their entire Cap stash to your inventory.</div>
+                <div class="patch-note">Neutral Threat: Feral Ghouls now dynamically multiply based on active simulation difficulty.</div>
+                <div class="patch-note">Logistics: "Fixed Reinforcements" (Always 3) trade rule added to boot options.</div>
+
+                <div class="patch-version">v1.3 [ENVIRONMENTAL HAZARDS]</div>
+                <div class="patch-note">Meteorology: Radstorms added to the simulation.</div>
+<div class="patch-note">Fauna: Wild Ghouls (Neutral Threat) optional hazard integrated into the map.</div>
+                <div class="patch-note">Comms: Pip-Boy Wasteland Radio frequency scanner initialized.</div>
+
+                <div class="patch-version">v1.2 [HOLOTAPE INTERFACE]</div>
+<div class="patch-note">Telemetry: Vault-Tec Action Log implemented for real-time combat and event tracking.</div>
+<div class="patch-note">Immersion: Randomized wasteland encounter logs integrated into the turn cycle.</div>
+<div class="patch-note">System Clock: Holiday protocol initialized to trigger date-specific wasteland encounters.</div>
+<div class="patch-note">UI: Dynamic HP (Territorial Health) and AP (Action Point) tracking gauges added to the Commander's dashboard.</div>
+<div class="patch-note">Performance: Turbo Mode toggle added to bypass V.A.T.S. rendering for accelerated AI processing.</div>
+
+                <div class="patch-version">v1.1 [PIP-BOY SCREEN AND UI]</div>
+                <div class="patch-note">Themes: Capital Wasteland and Mojave holographic overlays loaded.</div>
+
+                <div class="patch-version">v1.0 [ROBCO OS INITIALIZED]</div>
+                <div class="patch-note">Baseline Strategic Simulation established. Faction telemetry and global map data synchronized.</div>
+                
+                <div class="patch-version" style="margin-top: 40px;">[ SYSTEM ACKNOWLEDGEMENT ]</div>
+                <div class="patch-note" style="opacity: 0.8; font-style: italic;">RobCo OS framework, strategic logic, and terminal UI co-developed with the assistance of Google Gemini.</div>
+
+                <br><br><br> </div>
+        </div>
+        <button id="close-updates-btn" style="margin-top: 15px; width: 100%; padding: 8px;">CLOSE LOG</button>
+    </div>
+</div></div><div class="info">
        <div class="info-one"><div class="leader"></div><div class="country"></div><div>Reinforcements: <span class="income"></span></div><div class="bar"></div></div> 
        <div class="info-two"><div class="leader"></div><div class="country"></div><div>Reinforcements: <span class="income"></span></div><div class="bar"></div></div> 
        <div class="info-three"><div class="leader"></div><div class="country"></div><div>Reinforcements: <span class="income"></span></div><div class="bar"></div></div> 
@@ -935,6 +1044,13 @@ if (!document.getElementById('radstorm-styles')) {
         .radstorm-active { animation: radstormAct 0.4s infinite alternate !important; opacity: 0.95; }
     `;
     document.head.appendChild(style);
+}
+
+// --- ROBCO SECURITY PROTOCOL (XSS SANITIZER) ---
+function sanitizeInput(str) {
+    let temp = document.createElement('div');
+    temp.textContent = str;
+    return temp.innerHTML;
 }
 
 const continents = [
@@ -1324,7 +1440,17 @@ Gamestate.init = function(){
     closeHelpBtn?.addEventListener('click', () => {
         if (helpModal) helpModal.style.display = 'none';
     });
-
+// --- Update Ticker Listeners ---
+    document.getElementById('open-updates-btn')?.addEventListener('click', (e) => { 
+        e.preventDefault(); 
+        let updatesModal = document.getElementById('updates-modal');
+        if (updatesModal) updatesModal.style.display = 'block';
+    });
+    
+    document.getElementById('close-updates-btn')?.addEventListener('click', () => {
+        let updatesModal = document.getElementById('updates-modal');
+        if (updatesModal) updatesModal.style.display = 'none';
+    });
     this.injectHolidayEvents();
 
     submitName?.addEventListener('click', this.start.bind(this));
@@ -1445,12 +1571,18 @@ this.hazardsEnabled = optRadstorms;
     let diffSelect = document.getElementById('chosen-difficulty');
     this.difficulty = diffSelect ? diffSelect.value : "Normal";
 
-    if (chosenLeader && chosenCountry) {
-        this.players[0].name = chosenLeader.value;
-        this.players[0].country = chosenCountry.value;
-        if (playerName) playerName.textContent = chosenLeader.value;
-        if (playerCountry) playerCountry.textContent = chosenCountry.value;
+if (chosenLeader && chosenCountry) {
+        // Run user input through the security sanitizer before saving it
+        let safeLeader = sanitizeInput(chosenLeader.value);
+        let safeCountry = sanitizeInput(chosenCountry.value);
+
+        this.players[0].name = safeLeader;
+        this.players[0].country = safeCountry;
+        
+        if (playerName) playerName.textContent = safeLeader;
+        if (playerCountry) playerCountry.textContent = safeCountry;
     }
+
 // --- SET CUSTOM FACTION COLOR & PREVENT DUPLICATES ---
     if (chosenColor) {
         let selectedHex = chosenColor.value;
