@@ -6,6 +6,8 @@ Welcome to the RobCo OS Strategic Simulation. This is a completely free, browser
 
 You play as a wasteland commander tasked with outmaneuvering rival factions, managing resources, and surviving environmental hazards to claim all 42 territories on the map. The game is 100% free to play, download, and modify.
 
+**Ready to jump into the wasteland?** Play right now in your browser at [linology.tech/risk](https://linology.tech/risk/). Linology is the official host, chosen for its safety and reliability. While other websites are free to host the game, this is the only link guaranteed to be secure and fully updated.
+
 ---
 
 ## How to Play
@@ -77,9 +79,6 @@ Because the game is completely self-contained, you don't need to install anythin
 ---
 
 **Disclaimer:** This is an independent, fan-made project. It is not affiliated with, endorsed by, or sponsored by Bethesda Softworks, Bethesda Game Studios, or any entities associated with the Fallout franchise.
-
-
-
 
 
 
