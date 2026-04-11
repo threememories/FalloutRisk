@@ -84,6 +84,13 @@ Because the game is completely self-contained, you don't need to install anythin
 
 ## Change Log
 
+**v1.7 [SCORCHED EARTH & COMMANDERS]**
+
+- Scorched Earth: Optional Nuke Protocol. Secure Launch Codes and hold highly-defensible Command Silos to unleash permanent radiation.
+- Commander Protocol: Each faction is led by a VIP (100 HP). If they die, you lose. Manage AP, Stimpaks, and map movement to survive.
+- Wasteland Diplomacy: Implemented the ability to offer Caps to rivals for a 3-Round Ceasefire.
+- Wasteland Karma: Breaking a truce now incurs a permanent "Betrayal Tax" and triggers retaliatory AI Spite Alliances.
+
 **v1.6 [SECURITY & UI PROTOCOLS]**
 
 - Anti-Hacking Patch: Implemented advanced input sanitization to block malicious code injection at the boot terminal.
