@@ -84,6 +84,17 @@ Because the game is completely self-contained, you don't need to install anythin
 
 ## Change Log
 
+**v1.8 [MOBILE PORT & HOTFIXES]**
+
+- Hardware Port: RobCo OS now natively supports handheld (mobile) terminals. Device must be rotated to Landscape mode to initialize.
+- Threat Patch: Resolved a logic error preventing the Wild Ghouls subsystem from properly infesting unclaimed sectors at boot.
+- The Status and Directive terminal readouts have been completely overhauled.
+- Commanders now receive heavy home-turf damage resistance and can flip enemy territories after a ten-phase siege.
+- When a faction's Commander is killed, their entire empire completely collapses into unowned, neutral wasteland.
+- Wasteland diplomacy dynamically scales Ceasefire negotiations, trading exact Bottle Cap amounts for equal rounds of peace.
+- The interface and map graphics have been optimized to provide a more stable, readable, and streamlined visual experience during gameplay.
+- Shout-out to Alex for helping me debug.
+
 **v1.7 [SCORCHED EARTH & COMMANDERS]**
 
 - Scorched Earth: Optional Nuke Protocol. Secure Launch Codes and hold highly-defensible Command Silos to unleash permanent radiation.
