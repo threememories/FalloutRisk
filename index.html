@@ -30,6 +30,18 @@
             --grit-opacity: 0.22;
             --vip-color: #ff7700; /* FNV Orange/Red for VIP */
         }
+/* --- Fallout 4 Theme (Quantum Blue) --- */
+body.theme-fo4 { 
+    --pip-color: #22ccff; 
+    --pip-glow: 0 0 10px rgba(34, 204, 255, 0.5); 
+    --pip-bg-tint: brightness(1.2) contrast(1.1) sepia(0.4) hue-rotate(180deg) saturate(200%); 
+    --pip-dark: #00111a; 
+    --pip-panel: rgba(0, 17, 26, 0.95); 
+    --pip-panel-solid: #001a26; 
+    --vignette-shadow: rgba(0, 10, 20, 0.85); 
+    --grit-opacity: 0.15; 
+    --vip-color: #ffffff; /* Institute White for VIP stars */ 
+}
         body {
             background-color: var(--pip-dark); color: var(--pip-color);
             margin: 0; padding: 0; overflow: hidden; 
@@ -119,17 +131,25 @@ input[type=range]::-webkit-slider-thumb {
     overflow: hidden !important; /* Stops any extra text from spilling out and stretching it */
 }
         /* The new cursor animation */
-        .terminal-cursor {
-            display: inline-block;
-            animation: hard-blink 1s step-end infinite;
-            color: var(--pip-color);
-        }
+.terminal-cursor {
+    color: var(--pip-color);
+    font-size: 20px; /* FIX: Matched exactly to the input text size */
+    line-height: 1;
+    margin-left: -5px; /* Pulls it tight against the text */
+    animation: terminal-blink 1s step-end infinite;
+    pointer-events: none;
+}
 
-        @keyframes hard-blink {
-            0%, 100% { opacity: 1.0; text-shadow: 0 0 5px var(--pip-color); }
-            50% { opacity: 0; text-shadow: none; }
-        }        .cards-panel div { font-size: 16px; margin-bottom: 8px; }
-        .cards-panel span#card-count { font-size: 24px; margin-left: 8px; }
+@keyframes terminal-blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* FIX: Makes the cursor transparent instead of deleting it, locking the box height! */
+.terminal-input-wrapper input:focus + .terminal-cursor {
+    opacity: 0 !important; 
+    animation: none; 
+}
 
         .turbo-container { border: 1px solid var(--pip-color); padding: 5px; margin-top: 10px; text-align: center; display: flex; align-items: center; justify-content: center; background: var(--pip-dark); box-shadow: inset 0 0 5px rgba(24, 255, 98, 0.2); }
         .turbo-container input { width: 18px; height: 18px; margin-right: 8px; cursor: pointer; accent-color: var(--pip-color); }
@@ -325,7 +345,17 @@ input[type=range]::-webkit-slider-thumb {
     .log-entry { text-shadow: 0 0 4px #000, 0 0 8px #000, 0 0 12px #000, 0 0 16px var(--pip-dark); font-weight: bold; font-size: 11px; }
 }
 
-    </style>
+@keyframes terminal-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+.blinking-cursor { 
+    animation: terminal-blink 1s step-end infinite; 
+    pointer-events: none; 
+    /* This pulls the cursor backwards into the invisible gap */
+    margin-left: -8px; 
+    font-size: 18px; /* Bumped up slightly to match the text height */
+}/* Hide the fake cursor when the user clicks in to type */
+input:focus + .blinking-cursor { display: none; }    
+
+</style>
 </head>
 <body>
 <div id="portrait-warning">
@@ -334,31 +364,38 @@ input[type=range]::-webkit-slider-thumb {
     </div>
 <div class="container">
     
-    <div id="start-modal" class="overlay">
+<div id="start-modal" class="overlay">
         <div class="start-modal">
-            <h1 class="title">ROBCO OS v1.8</h1>
+            <h1 class="title">ROBCO OS v1.9</h1>
             
             <div class="form-group">
                 <label for="chosen-theme">Loaded Holotape (Theme)</label>
-                <select id="chosen-theme">
+                <select id="chosen-theme" style="height: 38px; box-sizing: border-box; padding: 4px 8px; font-size: 18px; font-family: inherit; background: rgba(0,0,0,0.8); color: var(--pip-color); border: 1px solid var(--pip-color); width: 100%; cursor: pointer;">
                     <option value="fo3" selected>Fallout 3 (Capital Wasteland)</option>
                     <option value="fnv">Fallout: New Vegas (Mojave)</option>
+                    <option value="fo4">Fallout 4 (The Commonwealth)</option>
                 </select>
             </div>
 
             <div class="form-group">
                 <label for="chosen-leader">Commander Name</label>
-                <input type="text" id="chosen-leader" value="Courier Six">
+                <div style="height: 38px; box-sizing: border-box; border: 1px solid var(--pip-color); background: rgba(0,0,0,0.3); padding: 0 8px; display: flex; align-items: center; cursor: text;" onclick="document.getElementById('chosen-leader').focus();">
+                    <input type="text" id="chosen-leader" value="Courier Six" style="background: transparent; border: none; outline: none; color: inherit; font-family: inherit; font-size: 20px; width: 11ch; padding: 0; margin: 0;" oninput="this.style.width = Math.max(1, this.value.length) + 'ch';">
+                    <span class="blinking-cursor">|</span>
+                </div>
             </div>
             
             <div class="form-group" style="display: flex; gap: 10px;">
                 <div style="flex: 2;">
                     <label for="chosen-country">Primary Faction</label>
-                    <input type="text" id="chosen-country" value="New California Republic">
+                    <div style="height: 38px; box-sizing: border-box; border: 1px solid var(--pip-color); background: rgba(0,0,0,0.3); padding: 0 8px; display: flex; align-items: center; cursor: text;" onclick="document.getElementById('chosen-country').focus();">
+                        <input type="text" id="chosen-country" value="New California Republic" style="background: transparent; border: none; outline: none; color: inherit; font-family: inherit; font-size: 20px; width: 23ch; padding: 0; margin: 0;" oninput="this.style.width = Math.max(1, this.value.length) + 'ch';">
+                        <span class="blinking-cursor">|</span>
+                    </div>
                 </div>
                 <div style="flex: 1;">
                     <label for="chosen-color">Color</label>
-                    <select id="chosen-color" style="cursor: pointer; padding: 6px;">
+                    <select id="chosen-color" style="height: 38px; box-sizing: border-box; padding: 4px 8px; font-size: 18px; font-family: inherit; background: rgba(0,0,0,0.8); color: var(--pip-color); border: 1px solid var(--pip-color); width: 100%; cursor: pointer;">
                         <option value="#0088ff" style="color: #0088ff;">BLUE</option>
                         <option value="#ff003c" style="color: #ff003c;">RED</option>
                         <option value="#ffaa00" style="color: #ffaa00;">ORANGE</option>
@@ -371,14 +408,14 @@ input[type=range]::-webkit-slider-thumb {
 
             <div class="form-group">
                 <label for="chosen-difficulty">Simulation Difficulty</label>
-                <select id="chosen-difficulty">
+                <select id="chosen-difficulty" style="height: 38px; box-sizing: border-box; padding: 4px 8px; font-size: 18px; font-family: inherit; background: rgba(0,0,0,0.8); color: var(--pip-color); border: 1px solid var(--pip-color); width: 100%; cursor: pointer;">
                     <option value="Easy">Easy (Favorable Combat Odds)</option>
                     <option value="Normal" selected>Normal (Standard 50/50)</option>
                     <option value="Hard">Hard (Odds Stacked Against You)</option>
                 </select>
             </div>
 
-<div class="form-group" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px 10px; margin-top: 20px; margin-bottom: 25px; text-align: left;">
+            <div class="form-group" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px 10px; margin-top: 20px; margin-bottom: 25px; text-align: left;">
                 
                 <label title="Watch the skies! Random radioactive storms wipe out 10-25% of troops caught in the blast zone." style="cursor: help; display: flex; align-items: center;">
                     <input type="checkbox" id="opt-radstorms" style="width: auto; cursor: pointer; margin-right: 8px; margin-bottom: 0;"> 
@@ -410,7 +447,6 @@ input[type=range]::-webkit-slider-thumb {
             <button id="submit-name">BOOT SEQUENCE...</button>
         </div>
     </div>
-
     <div id="code-popup" class="toast" style="top: 20%; bottom: auto; background: rgba(0,0,0,0.9); color: #ff3333; border-color: #ff3333; box-shadow: 0 0 20px #ff3333; z-index: 10000; pointer-events: none; text-shadow: 0 0 5px #ff3333; font-weight: bold; font-size: 24px;">
         ☢ LAUNCH CODE FRAGMENT RECOVERED ☢
     </div>
@@ -503,7 +539,7 @@ input[type=range]::-webkit-slider-thumb {
     
     <div class="player-panel">
         <div>
-            <h1>ROBCO STRAT-COM<span class="title-version">v1.8</span></h1>
+            <h1>ROBCO STRAT-COM<span class="title-version">v1.9</span></h1>
             <div class="player-name"></div>
             <div class="player-country"></div>
             
@@ -968,7 +1004,7 @@ input[type=range]::-webkit-slider-thumb {
                 <a href="#" id="open-updates-btn" class="download-link" style="color: var(--pip-color);">[ View Version History ]</a>
             </p>
             <p style="margin-bottom: 12px;">
-                <a href="mailto:threememories@yahoo.com?subject=RobCo%20OS%20Bug%20Report%20/%20Suggestion&body=Terminal%20Version:%20vv1.8%0D%0A%0D%0A[Describe%20the%20bug%20or%20suggestion%20here]" class="download-link" style="color: var(--pip-color);">[ Submit Bug Report / Suggestion ]</a>
+                <a href="mailto:threememories@yahoo.com?subject=RobCo%20OS%20Bug%20Report%20/%20Suggestion&body=Terminal%20Version:%20vv1.9%0D%0A%0D%0A[Describe%20the%20bug%20or%20suggestion%20here]" class="download-link" style="color: var(--pip-color);">[ Submit Bug Report / Suggestion ]</a>
             </p>
             <p style="margin-bottom: 12px; font-size: 12px;">To download: Save this webpage (Ctrl+S) as a single HTML file. <span style="opacity: 0.7;">(Music not included)</span></p>
             <p style="font-size: 11px; opacity: 0.7; margin-bottom: 4px;">Modified from the HTML5 Canvas Risk Game by <a href="https://github.com/vvedanta" target="_blank" class="download-link" style="color: var(--pip-color);">Vinayak Vedantam</a>.</p>
@@ -1027,6 +1063,15 @@ input[type=range]::-webkit-slider-thumb {
             <input type="range" id="dev-win-slider" min="-1" max="100" value="-1" style="width: 100%; cursor: pointer; margin-top: 5px;">
             <div style="font-size: 12px; color: var(--pip-color); opacity: 0.7;">(-1 = Standard Difficulty Rules)</div>
         </div>
+
+        <div style="margin-top: 15px; border-top: 1px dashed var(--pip-color); padding-top: 15px; text-align: left;">
+            <label for="dev-theme-override" style="display: block; margin-bottom: 5px; color: var(--pip-color);">Force UI Theme:</label>
+            <select id="dev-theme-override" style="width: 100%; padding: 6px; background: var(--pip-dark); color: var(--pip-color); border: 1px solid var(--pip-color); font-family: 'VT323', monospace; font-size: 18px; cursor: pointer;">
+                <option value="fo3">Fallout 3 (Green)</option>
+                <option value="fnv">New Vegas (Amber)</option>
+                <option value="fo4">Fallout 4 (Blue)</option>
+            </select>
+        </div>
         
         <button id="dev-back-btn" style="border-color: #ffcc00; color: #ffcc00; margin-top: 20px;">Back to Survival Guide</button>
     </div>
@@ -1037,6 +1082,13 @@ input[type=range]::-webkit-slider-thumb {
         
         <div class="ticker-window">
             <div class="ticker-text">
+                <div class="patch-version">v1.9 [MOBILE PORT & HOTFIXES]</div>
+                <div class="patch-note">Commander Combat Adjustments: Assassinations are much harder. Troop damage to Commanders is reduced, ambushes are limited to once per turn, and entrenched Commanders require taking the territory first.</div>
+                <div class="patch-note">Advanced AI Tactics: AI commanders now retreat at 50% HP, avoid crowded territories, hold defensive chokepoints, and navigate home intelligently if stranded.</div>
+                <div class="patch-note">Turbo Mode Auto-Skip: The game now automatically advances the phase when your AP depletes.</div>
+		<div class="patch-note">Smart UI & Map Upgrades: The map perfectly renders multiple VIP stars and adds V.A.T.S. hover warnings for entrenched targets.</div>
+<div class="patch-note">New Holotape Loaded: Added Fallout 4 (The Commonwealth) to the theme selector.</div>
+
                 <div class="patch-version">v1.8 [MOBILE PORT & HOTFIXES]</div>
                 <div class="patch-note">Hardware Port: RobCo OS now natively supports handheld (mobile) terminals. Device must be rotated to Landscape mode to initialize.</div>
                 <div class="patch-note">Threat Patch: Resolved a logic error preventing the Wild Ghouls subsystem from properly infesting unclaimed sectors at boot.</div>
@@ -1293,6 +1345,11 @@ const themeFactions = {
         { name: "General Oliver", country: "New California Republic" }, { name: "Caesar", country: "Caesar's Legion" },
         { name: "Mr. House", country: "New Vegas Securitrons" }, { name: "Elder McNamara", country: "Mojave Brotherhood" },
         { name: "Papa Khan", country: "Great Khans" }, { name: "Motor-Runner", country: "The Fiends" }
+    ],
+    "fo4": [
+        { name: "Preston Garvey", country: "The Minutemen" }, { name: "Father", country: "The Institute" },
+        { name: "Elder Maxson", country: "Brotherhood of Steel" }, { name: "Desdemona", country: "The Railroad" },
+        { name: "Captain Wes", country: "The Gunners" }, { name: "Colter", country: "Nuka-World Raiders" }
     ]
 };
 
@@ -1443,11 +1500,17 @@ if (Gamestate.nukesEnabled && targetCountry.isSilo) {
                 infoLines.push(`<span style="color:#ffcc00">COMMAND SILO (+${defBuff}% DEFENSE)</span>`);
             }
             
-            // Loop through all players to see if ANY commander is standing here
+// Loop through all players to see if ANY commander is standing here
             if (Gamestate.commandersEnabled) {
                 Gamestate.players.forEach(p => {
-                    if (p.alive && !p.isNeutral && p.commander && p.commander.loc === targetCountry.name) {
-                        let isStranded = p.name !== targetCountry.owner ? " (STRANDED)" : "";
+                    if (p.alive && !p.isNeutral && p.commander && p.commander.hp > 0 && p.commander.loc === targetCountry.name) {
+                        // NEW: Dynamically flag them as Stranded or Entrenched!
+                        let isStranded = "";
+                        if (p.name !== targetCountry.owner) {
+                            isStranded = " <span style='color: #ff3333;'>(STRANDED)</span>";
+                        } else {
+                            isStranded = " <span style='color: var(--vip-color);'>(ENTRENCHED: VIP DMG RESIST)</span>";
+                        }
                         infoLines.push(`<span style="color:${p.color}; text-shadow: 0 0 5px ${p.color}; font-weight:bold;">★ ${p.name} COMMANDER${isStranded} (${p.commander.hp} HP)</span>`);
                     }
                 });
@@ -1489,7 +1552,43 @@ const helpBtn = document.querySelector('#help-btn');
 const helpModal = document.querySelector('#help-modal');
 const closeHelpBtn = document.querySelector('#close-help-btn');
 
+
 let Gamestate = {};
+// --- ERA-SPECIFIC DYNAMIC THEME LOADER ---
+const themeSelector = document.getElementById('chosen-theme');
+const leaderInput = document.getElementById('chosen-leader');
+const factionInput = document.getElementById('chosen-country');
+
+Gamestate.eraFactions = {
+    fo3: ["The Enclave", "Super Mutants", "Talon Company", "Reilly's Rangers", "Outcasts"],
+    fnv: ["Caesar's Legion", "Mr. House", "Great Khans", "Boomers", "Fiends"],
+    fo4: ["The Institute", "Brotherhood of Steel", "The Railroad", "The Gunners", "Raider Gangs"]
+};
+
+if (themeSelector) {
+    themeSelector.addEventListener('change', function(e) {
+        let theme = e.target.value;
+        
+        // 1. SAFELY Swap CSS (Only removes theme classes, leaves game logic alone!)
+        document.body.classList.remove('theme-fo3', 'theme-fnv', 'theme-fo4');
+        if (theme !== 'fo3') document.body.classList.add('theme-' + theme);
+        
+// 2. Auto-fill names and perfectly adjust the cursor
+        if (theme === 'fo3') {
+            if(leaderInput) { leaderInput.value = "Lone Wanderer"; leaderInput.style.width = "13ch"; }
+            if(factionInput) { factionInput.value = "Brotherhood of Steel"; factionInput.style.width = "20ch"; }
+        } else if (theme === 'fnv') {
+            if(leaderInput) { leaderInput.value = "Courier Six"; leaderInput.style.width = "11ch"; }
+            if(factionInput) { factionInput.value = "New California Republic"; factionInput.style.width = "23ch"; }
+        } else if (theme === 'fo4') {
+            if(leaderInput) { leaderInput.value = "Sole Survivor"; leaderInput.style.width = "13ch"; }
+            if(factionInput) { factionInput.value = "The Minutemen"; factionInput.style.width = "13ch"; }
+        }
+    });
+    
+    // Trigger on boot to lock in the colors safely
+    themeSelector.dispatchEvent(new Event('change'));
+}
 Gamestate.logQueue = [];
 Gamestate.isLogging = false;
 
@@ -1718,7 +1817,8 @@ document.getElementById('secret-dev-key')?.addEventListener('click', (e) => {
     });
     document.getElementById('dev-heal')?.addEventListener('click', () => { if(this.player.commander) this.player.commander.hp = 100; this.updateInfo(); this.showToast("Dev: Commander Healed"); });
     document.getElementById('dev-storm')?.addEventListener('click', () => { this.radstorm.cooldown = 1; this.processRadstorm(); document.getElementById('dev-modal').style.display = 'none'; });
-document.getElementById('dev-win-slider')?.addEventListener('input', function() {
+
+    document.getElementById('dev-win-slider')?.addEventListener('input', function() {
         let val = parseInt(this.value);
         if (val === -1) {
             document.getElementById('dev-win-val').textContent = "NORMAL";
@@ -1728,9 +1828,26 @@ document.getElementById('dev-win-slider')?.addEventListener('input', function() 
             Gamestate.devWinOverride = val / 100;
         }
     });
+
+    // --- DEV TOOL: FORCE UI THEME SWAP ---
+    document.getElementById('dev-theme-override')?.addEventListener('change', function(e) {
+        let theme = e.target.value;
+        
+        // Safely wipe the current era's CSS tags
+        document.body.classList.remove('theme-fnv', 'theme-fo4');
+        
+        // Apply the new theme (FO3 is default, so it doesn't need an extra class)
+        if (theme !== 'fo3') {
+            document.body.classList.add('theme-' + theme);
+        }
+        
+        // Show a dev toast confirming the swap
+        if (Gamestate.showToast) Gamestate.showToast("Dev Override: UI forced to " + theme.toUpperCase());
+    });
 }
 
 Gamestate.updateButtonText = function() {
+    let end = document.getElementById('end');
     if (!end) return;
     if (this.stage === "Fortify") { 
         end.textContent = "Deploy Troops"; end.style.opacity = "0.5"; end.style.pointerEvents = "none";
@@ -1739,11 +1856,9 @@ Gamestate.updateButtonText = function() {
         end.textContent = "End Attack Phase"; end.style.opacity = "1"; end.style.pointerEvents = "auto"; 
     } 
     else if (this.stage === "Maneuver") {
-        if(this.commandersEnabled && this.player.alive && this.player.commander) {
-            end.textContent = this.maneuverSource ? "Next Phase" : "Skip Move";
-        } else {
-            end.textContent = "End Turn";
-        }
+        // If Commanders are on, it says Next Phase. Otherwise, End Turn.
+        let nextStr = (this.commandersEnabled && this.player.alive && this.player.commander) ? "Next Phase" : "End Turn";
+        end.textContent = this.hasManeuvered ? nextStr : "Skip Move";
         end.style.opacity = "1"; end.style.pointerEvents = "auto";
     } 
     else if (this.stage === "Commander Phase") { 
@@ -1785,14 +1900,17 @@ this.devWinOverride = -1;
         if (el) { el.classList.remove('radstorm-warning', 'radstorm-active', 'allied-territory', 'crater', 'glowing-sea'); c.isCrater = false; c.radDecay = 0; c.isSilo = false; c.siloTurns = 0; }
     });
 
-    let themeDropdown = document.getElementById('chosen-theme');
+let themeDropdown = document.getElementById('chosen-theme');
     let selectedTheme = themeDropdown ? themeDropdown.value : "fo3";
-    document.body.classList.remove('theme-fnv');
-    if (selectedTheme === "fnv") document.body.classList.add('theme-fnv');
-
+    
+    // Safely remove old themes and apply the new one
+    document.body.classList.remove('theme-fnv', 'theme-fo4');
+    if (selectedTheme !== "fo3") document.body.classList.add('theme-' + selectedTheme);
+    
     this.players = JSON.parse(JSON.stringify(basePlayers)); 
 
-    let factionList = themeFactions[selectedTheme];
+    // Fetch the correct faction list, with a failsafe fallback so the game never crashes again
+    let factionList = themeFactions[selectedTheme] || themeFactions["fo3"];
     for(let i = 0; i < 6; i++) { this.players[i].name = factionList[i].name; this.players[i].country = factionList[i].country; this.players[i].codes = 0; }
 
     let horrors = this.players.find(p => p.isNeutral && p.name === "Wasteland Horrors");
@@ -1911,9 +2029,10 @@ Gamestate.drawMapText = function() {
         
         if (areaOnMap && textNode) {
             if(country.isCrater) { textNode.innerHTML = ""; return; }
-            let text = `${country.army}`;
             
             let iconHtml = "";
+            
+            // 1. Check for Command Silo
             if(this.nukesEnabled && country.isSilo) {
                 let isLaunchSite = (this.activeNuke && this.activeNuke.launchSilo === country.name);
                 let siloColor = isLaunchSite ? "#ff3333" : "#ffcc00";
@@ -1921,17 +2040,28 @@ Gamestate.drawMapText = function() {
                 iconHtml += `<tspan fill="${siloColor}" font-size="22px" ${pulse}>☢</tspan> `;
             }
             
+            // 2. Check for Multiple Commanders
             if(this.commandersEnabled) {
                 this.players.forEach(p => {
-                    if (p.alive && !p.isNeutral && p.commander && p.commander.loc === country.name) {
-                        iconHtml += `<tspan fill="${p.color}" font-size="20px" filter="drop-shadow(0 0 3px #000)">★</tspan> `;
+                    // FIX: Added "hp > 0" so dead commanders don't leave a ghost star!
+                    if (p.alive && !p.isNeutral && p.commander && p.commander.hp > 0 && p.commander.loc === country.name) {
+                        // Added dx="2" to give multiple stars a tiny bit of breathing room
+                        iconHtml += `<tspan fill="${p.color}" font-size="20px" filter="drop-shadow(0 0 3px #000)" dx="2">★</tspan>`;
                     }
                 });
             }
             
-            if (iconHtml !== "") { text += `<tspan dy="-15">${iconHtml}</tspan>`; }
+            // 3. Perfect Stacking Output
+            // We grab the exact X coordinate of the text to force the stars to center directly over the number
+            let xCoord = textNode.getAttribute("x");
             
-            textNode.innerHTML = text;
+            if (iconHtml !== "") { 
+                // Stack the icons up (-12), then drop the army number back down (16)
+                textNode.innerHTML = `<tspan x="${xCoord}" dy="-12">${iconHtml}</tspan><tspan x="${xCoord}" dy="16">${country.army}</tspan>`;
+            } else {
+                // If no icons, just reset the army number to normal
+                textNode.innerHTML = `<tspan x="${xCoord}" dy="3">${country.army}</tspan>`;
+            }
         }
     });
 }
@@ -2269,32 +2399,57 @@ Gamestate.updateInfo = function(){
         if (this.player.areas.length <= 5) { hpFill.style.background = "#ff0000"; hpFill.style.boxShadow = "0 0 10px rgba(255, 0, 0, 0.8)"; } 
         else { hpFill.style.background = "var(--pip-color)"; hpFill.style.boxShadow = "var(--pip-glow)"; }
 
-        let apPercentage = 0;
+let apPercentage = 0;
+        let shouldAutoSkip = false; // The Turbo Sensor
+
         if (this.stage === "Fortify") {
-            let maxReserve = Math.max(this.player.reserve + this.playerTroopsPlaced, 1); apPercentage = (this.player.reserve / maxReserve) * 100;
+            let maxReserve = Math.max(this.player.reserve + this.playerTroopsPlaced, 1);
+            apPercentage = (this.player.reserve / maxReserve) * 100;
         } else if (this.stage === "Battle") {
-            let currentStrikeForce = 0; let validAttacks = 0; let ownedTerritories = this.countries.filter(c => c.owner === this.player.name);
+            let currentStrikeForce = 0;
+            let validAttacks = 0; let ownedTerritories = this.countries.filter(c => c.owner === this.player.name);
             ownedTerritories.forEach(t => {
                 if (t.army > 1) {
                     let hasEnemyNeighbor = t.neighbours.some(n => { let nc = this.countries.find(x => x.name === n); return nc && nc.owner !== this.player.name && !nc.isCrater; });
                     if (hasEnemyNeighbor) { currentStrikeForce += (t.army - 1); validAttacks++; }
                 }
             });
-            if (validAttacks === 0) apPercentage = 0; 
+            if (validAttacks === 0) { 
+                apPercentage = 0; 
+                shouldAutoSkip = true; // No valid attacks left!
+            } 
             else {
                 if (this.lastStage !== "Battle") this.initialStrikeForce = currentStrikeForce;
                 if (currentStrikeForce > (this.initialStrikeForce || 1)) this.initialStrikeForce = currentStrikeForce;
                 apPercentage = Math.min(100, (currentStrikeForce / Math.max(this.initialStrikeForce, 1)) * 100);
             }
         } else if (this.stage === "Maneuver") {
-            let canManeuver = false; let ownedTerritories = this.countries.filter(c => c.owner === this.player.name);
+            let canManeuver = false;
+            let ownedTerritories = this.countries.filter(c => c.owner === this.player.name);
             for (let t of ownedTerritories) { if (t.army > 1 && t.neighbours.some(n => { let nc = this.countries.find(x => x.name === n); return nc && nc.owner === this.player.name; })) { canManeuver = true; break; } }
             apPercentage = canManeuver ? (this.maneuverSource ? 0 : 100) : 0;
         } else if (this.stage === "Commander Phase" && this.commandersEnabled && this.player.commander) {
             apPercentage = (this.player.commander.ap / 2) * 100;
+            if (this.player.commander.ap <= 0) shouldAutoSkip = true; // Out of AP!
         } else apPercentage = 0; 
         
         apFill.style.width = apPercentage + "%";
+        
+        // --- TURBO MODE AUTO-SKIP ENGINE ---
+        let turbo = document.getElementById('turbo-toggle') && document.getElementById('turbo-toggle').checked;
+        if (turbo && shouldAutoSkip && !this.aiTurn) {
+            if (!this.autoSkipTimer) {
+                this.autoSkipTimer = setTimeout(() => {
+                    this.autoSkipTimer = null;
+                    if (!this.aiTurn && (this.stage === "Battle" || this.stage === "Commander Phase")) {
+                        if (Gamestate.logAction) Gamestate.logAction("[ TURBO ] AP Depleted. Auto-advancing phase...", true);
+                        this.handleEndTurn();
+                    }
+                }, 1200); // 1.2 second delay so you can read the final combat logs
+            }
+        } else {
+            if (this.autoSkipTimer) { clearTimeout(this.autoSkipTimer); this.autoSkipTimer = null; }
+        }
         if (apPercentage <= 0) { apFill.style.opacity = "0"; apFill.style.visibility = "hidden"; } else { apFill.style.opacity = "1"; apFill.style.visibility = "visible"; }
         if (hpPercentage <= 0) { hpFill.style.opacity = "0"; hpFill.style.visibility = "hidden"; } else { hpFill.style.opacity = "1"; hpFill.style.visibility = "visible"; }
     } else if (!this.player.alive && hpFill && apFill) {
@@ -2503,8 +2658,9 @@ Gamestate.handleEndTurn = async function(){
         if(this.prevTarget) this.prevTarget.classList.remove('flash');
         this.prevCountry = null; this.prevTarget = null;
 
-        if (canManeuver) {
-            this.stage = "Maneuver"; 
+if (canManeuver) {
+            this.stage = "Maneuver";
+            this.hasManeuvered = false; // Tracks if they moved a unit
             this.maneuverSource = null; this.maneuverDest = null;
             this.updateButtonText(); 
             if (turnInfo) turnInfo.textContent = "Maneuver Phase"; 
@@ -2525,11 +2681,20 @@ Gamestate.handleEndTurn = async function(){
         this.stage = "Commander Phase"; 
         this.player.commander.ap = 2;
         this.player.commander.hasFought = false; // Reset attack limit
+this.player.commander.hasBeenAmbushed = false; // Reset attack limit
         this.aiTurn = false; // Guard against AI hijacking
 
         this.updateButtonText(); 
         if(turnInfo) turnInfo.textContent = "Commander Phase"; 
-        if(turnInfoMessage) turnInfoMessage.textContent = "Move your Commander or use a Stimpak. (Costs 1 AP)";
+// --- DYNAMIC COMMANDER DIRECTIVE ---
+            if (this.player.commander) {
+                let canHeal = (this.player.commander.stimpaks > 0 && this.player.commander.hp < 100);
+                if (canHeal) {
+                    turnInfoMessage.textContent = "Move your Commander or use a Stimpak. (Costs 1 AP per move)";
+                } else {
+                    turnInfoMessage.textContent = "Move your Commander. (Costs 1 AP per move)";
+                }
+            }
         this.updateInfo(); 
         return;
     }
@@ -2619,20 +2784,25 @@ Gamestate.attack = async function(e){
             let trespasser = this.players.find(p => p !== this.player && p.alive && !p.isNeutral && p.commander && p.commander.hp > 0 && p.commander.loc === country.name);
 
 if (this.commandersEnabled && trespasser) {
-                // --- 1-TROOP EXPLOIT PATCH (PURGE) ---
                 if (country.army <= 1) {
                     this.showToast("Garrison too weak! Need at least 2 troops to execute a Purge.", "red");
+                    e.target.classList.add('flash'); this.prevTarget = e.target; this.prevCountry = country; return;
+                }
+                if (trespasser.commander.hasBeenAmbushed) {
+                    this.showToast("Target has already evaded a tactical strike this turn!", "red");
                     e.target.classList.add('flash'); this.prevTarget = e.target; this.prevCountry = country; return;
                 }
 
                 // Summon the UI in "Purge" mode (passing 'true' at the end)
                 let choice = await this.showTacticalModal(trespasser.name, formatTerritoryName(country.name), true);
                 if (choice === "ambush") {
-                    trespasser.commander.wasAttacked = true; // Pauses their subversion timer!
-                    // Your stationed troops immediately open fire on the trespasser!
+                    trespasser.commander.wasAttacked = true;
+                    trespasser.commander.hasBeenAmbushed = true; // LIMIT TO 1 PER ROUND
                     if (map) map.style.pointerEvents = "none";
+                    
                     let atkForce = country.army;
-                    let dmgToVip = atkForce * Math.floor(Math.random() * 4 + 2); // Deadly home-turf advantage!
+                    // NERFED DAMAGE: 1 to 2 DMG per troop
+                    let dmgToVip = atkForce * (Math.floor(Math.random() * 2) + 1);
                     let retaliation = Math.floor(Math.random() * 2); 
 
                     trespasser.commander.hp -= dmgToVip;
@@ -2670,33 +2840,42 @@ if (this.commandersEnabled && trespasser) {
             
             let attackChoice = "assault"; // Defaults to normal combat if no VIP is present
             
-            // If an enemy Commander is hiding here, summon the UI!
+// If an enemy Commander is hiding here, enforce the new territory rules!
             if (this.commandersEnabled && strandedCmdr) {
-                attackChoice = await this.showTacticalModal(strandedCmdr.name, formatTerritoryName(country.name));
-                
-                // If the player clicked "ABORT ORDER"
-                if (attackChoice === "cancel") {
-                    this.prevCountry = null; this.prevTarget = null; return;
+                let isCmdrOnOwnLand = (country.owner === strandedCmdr.name);
+                let isCmdrOnAllyLand = this.areAllies(strandedCmdr.name, country.owner);
+
+                if (isCmdrOnOwnLand || isCmdrOnAllyLand) {
+                    // Protected by territory or allies! Must assault territory first.
+                    attackChoice = "assault"; 
+                } else if (strandedCmdr.commander.hasBeenAmbushed) {
+                    // Protected by the once-per-round limit!
+                    attackChoice = "assault"; 
+                } else {
+                    attackChoice = await this.showTacticalModal(strandedCmdr.name, formatTerritoryName(country.name));
+                    if (attackChoice === "cancel") {
+                        this.prevCountry = null; this.prevTarget = null; return;
+                    }
                 }
             }
 
-// BRANCH 1: THE ASSASSINATION (Suppressive Fire)
+            // BRANCH 1: THE ASSASSINATION (Suppressive Fire)
             if (attackChoice === "ambush") {
-                // --- 1-TROOP EXPLOIT PATCH ---
                 if (this.prevCountry.army <= 1) {
                     this.showToast("Cannot Ambush: Minimum garrison of 1 troop must remain.", "red");
                     this.prevCountry = null; this.prevTarget = null; return;
                 }
-                strandedCmdr.commander.wasAttacked = true; // Pauses subversion timer
+                strandedCmdr.commander.wasAttacked = true;
+                strandedCmdr.commander.hasBeenAmbushed = true; // LIMIT TO 1 PER ROUND
 
                 let attackerMap = document.getElementById(this.prevCountry.name);
-                let defenderMap = document.getElementById(country.name); // <--- This was the missing line!
-                
+                let defenderMap = document.getElementById(country.name);
                 if (map) map.style.pointerEvents = "none";
                 await this.vatsTargeting(attackerMap, defenderMap);
                 
                 let atkForce = this.prevCountry.army - 1;
-                let dmgToVip = atkForce * Math.floor(Math.random() * 3 + 2); // 2 to 4 dmg per attacking troop
+                // NERFED DAMAGE: 1 to 2 DMG per troop
+                let dmgToVip = atkForce * (Math.floor(Math.random() * 2) + 1);
                 let retaliation = Math.floor(Math.random() * 3); // VIP fires back, kills 0 to 2 troops
                 
                 strandedCmdr.commander.hp -= dmgToVip;
@@ -2759,13 +2938,17 @@ Gamestate.maneuver = async function(e){
     let country = this.countries.find(c => c.name === e.target.id);
     if(!country || country.isCrater) return;
 
-  if(this.stage === "Commander Phase") {
+if(this.stage === "Commander Phase") {
         if(!this.player.commander || this.player.commander.ap <= 0) return;
         let cmdrLoc = this.countries.find(c => c.name === this.player.commander.loc);
         if(!cmdrLoc) return;
 
-        if(cmdrLoc.neighbours.includes(country.name)) {
-            let enemyCmdr = this.players.find(p => p !== this.player && p.alive && !p.isNeutral && p.commander && p.commander.loc === country.name);
+        let isNeighbor = cmdrLoc.neighbours.includes(country.name);
+        let isCurrentLoc = (cmdrLoc.name === country.name);
+
+        if(isNeighbor || isCurrentLoc) {
+            // Look for an enemy commander on the clicked territory
+            let enemyCmdr = this.players.find(p => p !== this.player && p.alive && !p.isNeutral && p.commander && p.commander.hp > 0 && p.commander.loc === country.name);
             
             if(enemyCmdr) {
                 if (this.player.commander.hasFought) {
@@ -2775,13 +2958,21 @@ Gamestate.maneuver = async function(e){
                 }
 
                 this.player.commander.ap -= 1;
-                await this.logAction(`[ REGICIDE DUEL ] Commander initiated direct combat with ${enemyCmdr.name}'s Commander!`, true);
                 
-                // 3. Combat Math (Safe Home Advantage: 5-15 DMG Max)
+                // If we attacked from a neighbor, step into the territory to face them!
+                if (isNeighbor) {
+                    this.player.commander.loc = country.name;
+                    this.player.commander.siegeTurns = 0;
+                }
+
+                await this.logAction(`[ REGICIDE DUEL ] Commander initiated direct combat with ${enemyCmdr.name}'s Commander at ${formatTerritoryName(country.name)}!`, true);
+                
+                // Combat Math (Safe Home Advantage: 5-15 DMG Max)
                 let rawDmgToEnemy = Math.floor(Math.random() * 16) + 10; 
                 let rawDmgToSelf = Math.floor(Math.random() * 11) + 10; 
                 
-                if (cmdrLoc.owner === this.player.name) { rawDmgToSelf = Math.floor(Math.random() * 11) + 5; }
+                // Check if the territory the duel is happening on belongs to you
+                if (country.owner === this.player.name) { rawDmgToSelf = Math.floor(Math.random() * 11) + 5; }
 
                 let cappedDmgToEnemy = Math.min(25, rawDmgToEnemy); 
                 let cappedDmgToSelf = Math.min(25, rawDmgToSelf);
@@ -2798,7 +2989,8 @@ Gamestate.maneuver = async function(e){
                 if(this.player.commander.hp <= 0) await this.killCommander(this.player);
                 
                 this.updateInfo();
-            } else { 
+            } else if (isNeighbor) { 
+                // NO ENEMY COMMANDER - JUST MOVE
                 this.player.commander.loc = country.name; this.player.commander.ap -= 1;
                 this.player.commander.siegeTurns = 0; // Reset subversion timer on move
                 
@@ -2841,18 +3033,21 @@ Gamestate.maneuver = async function(e){
                     }
                     moveAmount = input;
                 }                        
-                country.army += moveAmount;
+country.army += moveAmount;
                 this.prevCountry.army -= moveAmount;
+                this.hasManeuvered = true; // Flips the button text
 
                 let sourceMap = document.getElementById(`${this.prevCountry.name}`); let destMap = document.getElementById(`${country.name}`);
                 if (sourceMap && sourceMap.nextElementSibling) sourceMap.nextElementSibling.textContent = this.prevCountry.army;
-                if (destMap && destMap.nextElementSibling) destMap.nextElementSibling.textContent = country.army;
+if (destMap && destMap.nextElementSibling) destMap.nextElementSibling.textContent = country.army;
                 
                 if(this.commandersEnabled && this.player.commander && this.player.commander.loc === this.prevCountry.name && e.shiftKey) {
                      this.player.commander.loc = country.name;
-                     this.player.commander.siegeTurns = 0; // Reset subversion timer
-                     this.logAction(`Commander escorted to ${formatTerritoryName(country.name)}.`);
+                     if (Gamestate.logAction) this.logAction(`Commander escorted to ${formatTerritoryName(country.name)}.`);
                 }
+                
+                this.hasManeuvered = true; 
+                this.updateButtonText(); // <--- This forces the button to change!
                 this.updateInfo();
             }                
         }      
@@ -3015,6 +3210,8 @@ player.areas.forEach(areaName => {
         } 
         if(winModal) winModal.style.display = "block"; 
     }
+// NEW: Run the master win check to see if that was the final enemy!
+    this.checkWinCondition();
 }
 
 Gamestate.processRadDecay = async function() {
@@ -3162,6 +3359,49 @@ if (infoName[i-1]) infoName[i-1].parentElement.classList.remove('highlight');
                 }
             }
 
+Gamestate.checkWinCondition = function() {
+    if (this.gameOver) return; // Stop if the game is already over!
+
+    // Rule 1: Do you own every single piece of playable land?
+    let totalPlayableLand = this.countries.filter(c => !c.isCrater).length;
+    let playerLand = this.countries.filter(c => c.owner === this.player.name).length;
+    let ownsAllLand = (playerLand >= totalPlayableLand);
+
+    // Rule 2: Are all rival factions/commanders wiped out?
+    let allRivalsDead = true;
+    if (this.commandersEnabled) {
+        // Scans the globe for any rival commander with a heartbeat
+        let livingRivalCmdrs = this.players.filter(p => p !== this.player && !p.isNeutral && p.alive && p.commander && p.commander.hp > 0);
+        if (livingRivalCmdrs.length > 0) allRivalsDead = false;
+    } else {
+        // Standard Risk rules if commanders are disabled
+        let livingRivals = this.players.filter(p => p !== this.player && !p.isNeutral && p.alive);
+        if (livingRivals.length > 0) allRivalsDead = false;
+    }
+
+    // WIN TRIGGER: Must meet BOTH conditions!
+    if (ownsAllLand && allRivalsDead) {
+        this.gameOver = true;
+        let winModal = document.querySelector('#win-modal');
+        let winMessage = document.querySelector('.win-message');
+        
+        if(winMessage) {
+            winMessage.textContent = "TOTAL DOMINATION!";
+            winMessage.style.color = "var(--pip-color)"; 
+            let subMsg = winMessage.nextElementSibling;
+            if(subMsg && subMsg.tagName === 'P') {
+                if (this.commandersEnabled) {
+                    subMsg.textContent = "All rival commanders have been executed and the wasteland is entirely under your control.";
+                } else {
+                    subMsg.textContent = "You have conquered all territories in the wasteland.";
+                }
+            }
+        }
+        if(winModal) winModal.style.display = "block";
+    }
+};
+
+
 // AI DIPLOMACY LOGIC
             if(Math.random() < 0.15 && this.players[i].cards.length > 0) {
                 let potentialAllies = this.players.filter(p => p !== this.players[i] && p.alive && !p.isNeutral && !this.areAllies(this.players[i].name, p.name) && (!this.diplomacy.grudges[p.name] || !this.diplomacy.grudges[p.name].includes(this.players[i].name)));
@@ -3238,10 +3478,13 @@ if (infoName[i-1]) infoName[i-1].parentElement.classList.remove('highlight');
 
 if(this.commandersEnabled && this.players[i].commander) {
                 let loc = this.countries.find(c => c.name === this.players[i].commander.loc);
-                if(loc && loc.owner === this.players[i].name) { let regen = loc.isSilo ? 4 : 2; this.players[i].commander.hp = Math.min(100, this.players[i].commander.hp + regen); }
+                if(loc && loc.owner === this.players[i].name) { let regen = loc.isSilo ? 4 : 2; this.players[i].commander.hp = Math.min(100, this.players[i].commander.hp + regen);
+                }
                 
-                // FIX: Refill the AI Commander's Action Points every turn!
+                // FIX: Refill the AI Commander's Action Points & Combat Fatigue every turn!
                 this.players[i].commander.ap = 2; 
+                this.players[i].commander.hasBeenAmbushed = false; 
+                this.players[i].commander.hasFought = false; // Wakes the AI up!
             }
 
             this.updateInfo();
@@ -3300,7 +3543,19 @@ Gamestate.aiManeuver = function(i){
     let player = this.players[i];
     let owned = this.countries.filter(c => c.owner === player.name);
     
+    // Helper to check how many commanders are on a territory
+    let getCmdrCount = (locName) => {
+        return this.players.filter(p => p.alive && p.commander && p.commander.hp > 0 && p.commander.loc === locName).length;
+    };
+
+    // --- COMMANDER AI LOGIC ---
     if(this.commandersEnabled && player.commander && player.commander.hp > 0) {
+        
+        // FOOLPROOF RESET: Wake up!
+        player.commander.ap = 2;
+        player.commander.hasFought = false;
+        player.commander.hasBeenAmbushed = false;
+
         let maxLoops = 5; 
         while(player.commander.ap > 0 && maxLoops > 0) {
             maxLoops--;
@@ -3311,136 +3566,165 @@ Gamestate.aiManeuver = function(i){
             let neighbors = cmdrLoc.neighbours.map(n => this.countries.find(x=>x.name===n)).filter(c => c !== undefined);
             let friendlyNeighbors = neighbors.filter(c => c.owner === player.name);
             
-            // 1. RETREAT
-            if (player.commander.hp < 40 && friendlyNeighbors.length > 0) {
-                friendlyNeighbors.sort((a,b) => b.army - a.army);
-                if (friendlyNeighbors[0].army > cmdrLoc.army || (this.nukesEnabled && friendlyNeighbors[0].isSilo)) {
-                    player.commander.loc = friendlyNeighbors[0].name;
-                    player.commander.ap -= 1; movedOrAction = true;
-                    player.commander.siegeTurns = 0; // Reset subversion timer
-                    if (Gamestate.logAction) Gamestate.logAction(`VIP MOVEMENT: ${player.name}'s Commander retreats to ${formatTerritoryName(friendlyNeighbors[0].name)}.`);
-                }
-            }
-            
-            // 2. ATTACK
-            if (!movedOrAction && !player.commander.hasFought && player.commander.hp >= 40) {
-                let enemyCmdrs = [];
-                neighbors.forEach(n => {
-                    let eCmdr = this.players.find(p => p !== player && p.alive && !p.isNeutral && p.commander && p.commander.hp > 0 && p.commander.loc === n.name);
-                    if (eCmdr) enemyCmdrs.push(eCmdr);
-                });
-                
-                if (enemyCmdrs.length > 0) {
-                    enemyCmdrs.sort((a,b) => a.commander.hp - b.commander.hp);
-                    let target = enemyCmdrs[0];
-                    
-                    if (player.commander.hp >= target.commander.hp || player.commander.hp > 70) {
-                        player.commander.ap -= 1; movedOrAction = true;
-
-                        let rawDmgToTarget = Math.floor(Math.random() * 16) + 10;
-                        let rawDmgToSelf = Math.floor(Math.random() * 11) + 10; 
-
-                        if (cmdrLoc.owner === player.name) { rawDmgToSelf = Math.floor(Math.random() * 11) + 5; }
-                        let targetLoc = this.countries.find(c => c.name === target.commander.loc);
-                        if (targetLoc && targetLoc.owner === target.name) { rawDmgToTarget = Math.floor(Math.random() * 11) + 5; }
-
-                        let cappedDmgToTarget = Math.min(25, rawDmgToTarget); 
-                        let cappedDmgToSelf = Math.min(25, rawDmgToSelf);
-
-                        target.commander.hp -= cappedDmgToTarget; 
-                        player.commander.hp -= cappedDmgToSelf;
-                        player.commander.hasFought = true;
-                        target.commander.wasAttacked = true;
-                        player.commander.wasAttacked = true;
-
-                        if (Gamestate.logAction) Gamestate.logAction(`[ REGICIDE DUEL ] ${player.name} attacked ${target.name}'s Commander! (Dealt ${cappedDmgToTarget} DMG, Took ${cappedDmgToSelf} DMG)`, true);
-                        if(target.commander.hp <= 0) this.killCommander(target);
-                        if(player.commander.hp <= 0) this.killCommander(player);
+            // Collect enemy commanders in adjacent territories OR on the SAME territory!
+            let enemyCmdrs = [];
+            this.players.forEach(p => {
+                if (p !== player && p.alive && !p.isNeutral && p.commander && p.commander.hp > 0) {
+                    if (p.commander.loc === cmdrLoc.name || cmdrLoc.neighbours.includes(p.commander.loc)) {
+                        enemyCmdrs.push(p);
                     }
                 }
-            }
+            });
+            enemyCmdrs.sort((a,b) => a.commander.hp - b.commander.hp);
             
-            // 3. P.A.C.E.
-            if (!movedOrAction) {
+            // PRIORITY 4: RETREAT (HP < 50% - Retreating sooner!)
+            if (player.commander.hp < 50) {
                 if (friendlyNeighbors.length > 0) {
-                    let silo = friendlyNeighbors.find(c => this.nukesEnabled && c.isSilo);
-                    if (silo && cmdrLoc.name !== silo.name) {
-                        player.commander.loc = silo.name;
+                    // Find a safe spot that isn't already crowded
+                    let safeSpots = friendlyNeighbors.filter(c => 
+                        !c.neighbours.some(n => { let nc = this.countries.find(x=>x.name===n); return nc && nc.owner !== player.name; }) &&
+                        getCmdrCount(c.name) < 2
+                    ); 
+                    if (safeSpots.length === 0) safeSpots = friendlyNeighbors.filter(c => getCmdrCount(c.name) < 2);
+                    if (safeSpots.length === 0) safeSpots = friendlyNeighbors; // Desperate fallback
+                    
+                    let silo = safeSpots.find(c => this.nukesEnabled && c.isSilo);
+                    safeSpots.sort((a,b) => b.army - a.army);
+                    let retreatTarget = silo ? silo : safeSpots[0];
+                    
+                    if (retreatTarget.name !== cmdrLoc.name && (retreatTarget.army > cmdrLoc.army || silo)) {
+                        player.commander.loc = retreatTarget.name;
                         player.commander.ap -= 1; movedOrAction = true;
                         player.commander.siegeTurns = 0;
-                    } else if (!silo) {
-                        let chokePoints = friendlyNeighbors.filter(c => c.neighbours.some(n => {
-                            let nc = this.countries.find(x=>x.name===n); return nc && nc.owner !== player.name && !nc.isCrater;
-                        }));
-                        if (chokePoints.length > 0) {
-                            chokePoints.sort((a,b) => b.army - a.army);
-                            player.commander.loc = chokePoints[0].name; player.commander.ap -= 1; movedOrAction = true;
+                        if (Gamestate.logAction) Gamestate.logAction(`VIP MOVEMENT: ${player.name}'s Commander retreats to ${formatTerritoryName(retreatTarget.name)}.`);
+                        continue; 
+                    }
+                } else if (neighbors.length > 0) {
+                    // DESPERATE ESCAPE: Run anywhere to survive, but avoid crowding!
+                    let escapeOptions = neighbors.filter(c => getCmdrCount(c.name) < 2);
+                    if (escapeOptions.length === 0) escapeOptions = neighbors;
+                    let escapeRoute = escapeOptions[Math.floor(Math.random() * escapeOptions.length)];
+                    player.commander.loc = escapeRoute.name;
+                    player.commander.ap -= 1; movedOrAction = true;
+                    player.commander.siegeTurns = 0;
+                    if (Gamestate.logAction) Gamestate.logAction(`VIP MOVEMENT: ${player.name}'s stranded Commander desperately flees to ${formatTerritoryName(escapeRoute.name)}!`);
+                    continue;
+                }
+            }
+            
+            // PRIORITIES 1 & 3: DUEL ENEMY COMMANDERS
+            if (!movedOrAction && !player.commander.hasFought) {
+                let targetToDuel = null;
+                for (let target of enemyCmdrs) {
+                    let targetLoc = this.countries.find(c => c.name === target.commander.loc);
+                    
+                    // Don't dive into heavily crowded territories
+                    if (target.commander.loc !== cmdrLoc.name && getCmdrCount(target.commander.loc) >= 2) continue;
+
+                    let isHomeDefense = (cmdrLoc.owner === player.name || (targetLoc && targetLoc.owner === player.name));
+                    let isHealthy = (player.commander.hp >= 65); // Need solid HP to hunt
+                    let isTargetWeak = (player.commander.hp > target.commander.hp + 20);
+                    
+                    if (isHomeDefense || isHealthy || isTargetWeak) {
+                        targetToDuel = target; break; 
+                    }
+                }
+                
+                if (targetToDuel) {
+                    // Move to their territory if not already there
+                    if (player.commander.loc !== targetToDuel.commander.loc) {
+                        player.commander.loc = targetToDuel.commander.loc;
+                        player.commander.ap -= 1; 
+                        player.commander.siegeTurns = 0;
+                    } else {
+                        player.commander.ap -= 1; // Uses 1 AP to fight on the same tile
+                    }
+                    movedOrAction = true;
+                    
+                    let rawDmgToTarget = Math.floor(Math.random() * 16) + 10;
+                    let rawDmgToSelf = Math.floor(Math.random() * 11) + 10; 
+                    
+                    // BUG FIX: Strictly check the territory they are standing on AFTER they moved to attack
+                    let currentLocAfterMove = this.countries.find(c => c.name === player.commander.loc);
+
+                    if (currentLocAfterMove && currentLocAfterMove.owner === player.name) { 
+                        rawDmgToSelf = Math.floor(Math.random() * 11) + 5; 
+                        player.commander.hp = Math.min(100, player.commander.hp + 10);
+                    }
+                    if (currentLocAfterMove && currentLocAfterMove.owner === targetToDuel.name) { 
+                        rawDmgToTarget = Math.floor(Math.random() * 11) + 5; 
+                    }
+                    
+                    let cappedDmgToTarget = Math.min(25, rawDmgToTarget); 
+                    let cappedDmgToSelf = Math.min(25, rawDmgToSelf);
+                    
+                    targetToDuel.commander.hp -= cappedDmgToTarget; 
+                    player.commander.hp -= cappedDmgToSelf;
+                    player.commander.hasFought = true;
+                    targetToDuel.commander.wasAttacked = true;
+                    player.commander.wasAttacked = true;
+                    
+                    if (Gamestate.logAction) Gamestate.logAction(`[ REGICIDE DUEL ] ${player.name} engaged ${targetToDuel.name}'s Commander at ${formatTerritoryName(currentLocAfterMove.name)}! (Dealt ${cappedDmgToTarget} DMG, Took ${cappedDmgToSelf} DMG)`, true);
+                    if(targetToDuel.commander.hp <= 0) this.killCommander(targetToDuel);
+                    if(player.commander.hp <= 0) this.killCommander(player);
+                    continue;
+                }
+            }
+            
+            // PRIORITY 2: TACTICAL POSITIONING (Don't stray too far)
+            if (!movedOrAction) {
+                if (friendlyNeighbors.length > 0) {
+                    // Find a border territory (chokepoint) that isn't crowded
+                    let chokePoints = friendlyNeighbors.filter(c => 
+                        getCmdrCount(c.name) < 2 &&
+                        c.neighbours.some(n => { let nc = this.countries.find(x=>x.name===n); return nc && nc.owner !== player.name && !nc.isCrater; })
+                    );
+                    if (chokePoints.length > 0) {
+                        chokePoints.sort((a,b) => b.army - a.army); 
+                        if (chokePoints[0].name !== cmdrLoc.name) {
+                            player.commander.loc = chokePoints[0].name;
+                            player.commander.ap -= 1; movedOrAction = true;
                             player.commander.siegeTurns = 0;
-                        } else {
-                            friendlyNeighbors.sort((a,b) => b.army - a.army);
-                            if (friendlyNeighbors[0].army > cmdrLoc.army + 3) {
-                                player.commander.loc = friendlyNeighbors[0].name;
-                                player.commander.ap -= 1; movedOrAction = true;
-                                player.commander.siegeTurns = 0;
-                            }
+                            continue;
+                        }
+                    } else if (cmdrLoc.owner !== player.name) {
+                        // Stranded? Go back to friendly land!
+                        let uncrowdedFriendly = friendlyNeighbors.filter(c => getCmdrCount(c.name) < 2);
+                        if(uncrowdedFriendly.length === 0) uncrowdedFriendly = friendlyNeighbors;
+                        uncrowdedFriendly.sort((a,b) => b.army - a.army);
+                        player.commander.loc = uncrowdedFriendly[0].name;
+                        player.commander.ap -= 1; movedOrAction = true;
+                        player.commander.siegeTurns = 0;
+                    }
+                } else {
+                    // STRANDED TACTICS: Try to path TOWARDS home instead of randomly wandering.
+                    let pathHome = neighbors.find(n => {
+                        let nc = this.countries.find(x=>x.name===n);
+                        return nc && nc.neighbours.some(nn => { let nnc = this.countries.find(x=>x.name===nn); return nnc && nnc.owner === player.name; });
+                    });
+                    
+                    if (pathHome && getCmdrCount(pathHome) < 2) {
+                        player.commander.loc = pathHome;
+                        player.commander.ap -= 1; movedOrAction = true;
+                        player.commander.siegeTurns = 0;
+                        if (Gamestate.logAction) Gamestate.logAction(`VIP MOVEMENT: ${player.name}'s stranded Commander is falling back towards friendly lines!`);
+                        continue;
+                    } else if (neighbors.length > 0 && Math.random() < 0.20) {
+                        // Only a 20% chance to roam randomly if totally lost
+                        let uncrowded = neighbors.filter(c => getCmdrCount(c.name) < 2);
+                        if(uncrowded.length > 0) {
+                            let wanderTarget = uncrowded[Math.floor(Math.random() * uncrowded.length)];
+                            player.commander.loc = wanderTarget.name;
+                            player.commander.ap -= 1; movedOrAction = true;
+                            player.commander.siegeTurns = 0;
+                            continue;
                         }
                     }
-                } else if (neighbors.length > 0 && Math.random() < 0.80) {
-                    let wanderTarget = neighbors[Math.floor(Math.random() * neighbors.length)];
-                    player.commander.loc = wanderTarget.name; player.commander.ap -= 1; movedOrAction = true;
-                    player.commander.siegeTurns = 0;
-                    if (Gamestate.logAction) Gamestate.logAction(`VIP MOVEMENT: ${player.name}'s stranded Commander is wandering through ${formatTerritoryName(wanderTarget.name)}.`);
                 }
             }
             if (!movedOrAction || player.commander.hp <= 0) break;
         }
     }
-
-// --- 1. ACTIVATE THE STIMPAK BUTTON ---
-document.getElementById('dev-stimpak').onclick = () => {
-    if (Gamestate.player && Gamestate.player.commander) {
-        Gamestate.player.commander.stimpaks++;
-        Gamestate.updateInfo();
-        if (Gamestate.logAction) Gamestate.logAction("OVERSEER OVERRIDE: +1 Stimpak added to inventory.");
-    }
-};
-
-// --- 2. DYNAMIC DEV MENU LOCKOUTS ---
-// Call this function right before you open your Dev Modal!
-Gamestate.refreshDevMenuStatus = function() {
-    let btnHeal = document.getElementById('dev-heal');
-    let btnStimpak = document.getElementById('dev-stimpak');
-    let btnCode = document.getElementById('dev-code');
-    let btnStorm = document.getElementById('dev-storm');
-
-    // 1. DIRECTLY READ THE START MENU CHECKBOXES
-    let cmdrOn = document.getElementById('opt-commander') ? document.getElementById('opt-commander').checked : false;
-    let nukesOn = document.getElementById('opt-nukes') ? document.getElementById('opt-nukes').checked : false;
-    let stormsOn = document.getElementById('opt-radstorms') ? document.getElementById('opt-radstorms').checked : false;
-
-    // 2. HANDLE COMMANDER BUTTONS
-    if (cmdrOn) {
-        if(btnHeal) { btnHeal.disabled = false; btnHeal.style.opacity = "1"; btnHeal.style.cursor = "pointer"; btnHeal.style.pointerEvents = "auto"; }
-        if(btnStimpak) { btnStimpak.disabled = false; btnStimpak.style.opacity = "1"; btnStimpak.style.cursor = "pointer"; btnStimpak.style.pointerEvents = "auto"; }
-    } else {
-        if(btnHeal) { btnHeal.disabled = true; btnHeal.style.opacity = "0.2"; btnHeal.style.cursor = "not-allowed"; btnHeal.style.pointerEvents = "none"; }
-        if(btnStimpak) { btnStimpak.disabled = true; btnStimpak.style.opacity = "0.2"; btnStimpak.style.cursor = "not-allowed"; btnStimpak.style.pointerEvents = "none"; }
-    }
-
-    // 3. HANDLE NUKE BUTTON
-    if (nukesOn) {
-        if(btnCode) { btnCode.disabled = false; btnCode.style.opacity = "1"; btnCode.style.cursor = "pointer"; btnCode.style.pointerEvents = "auto"; }
-    } else {
-        if(btnCode) { btnCode.disabled = true; btnCode.style.opacity = "0.2"; btnCode.style.cursor = "not-allowed"; btnCode.style.pointerEvents = "none"; }
-    }
-
-    // 4. HANDLE RADSTORM BUTTON 
-    if (stormsOn) {
-        if(btnStorm) { btnStorm.disabled = false; btnStorm.style.opacity = "1"; btnStorm.style.cursor = "pointer"; btnStorm.style.pointerEvents = "auto"; }
-    } else {
-        if(btnStorm) { btnStorm.disabled = true; btnStorm.style.opacity = "0.2"; btnStorm.style.cursor = "not-allowed"; btnStorm.style.pointerEvents = "none"; }
-    }
-};
 
     // --- REGULAR TROOP MANEUVER LOGIC ---
     let internal = owned.filter(c => c.army > 1 && c.neighbours.every(n => { let nc = this.countries.find(x => x.name === n); return nc && nc.owner === player.name && !nc.isCrater; }));
@@ -3453,10 +3737,52 @@ Gamestate.refreshDevMenuStatus = function() {
                 let siloNeighbor = source.neighbours.find(n => { let nc = this.countries.find(x => x.name === n); return nc && nc.owner === player.name && nc.isSilo; });
                 if(siloNeighbor) dest = this.countries.find(x => x.name === siloNeighbor);
             }
-            let moveAmount = source.army - 1; dest.army += moveAmount; source.army -= moveAmount;
+            let moveAmount = source.army - 1;
+            dest.army += moveAmount; source.army -= moveAmount;
         }
     }
 }
+
+// --- 1. ACTIVATE THE STIMPAK BUTTON ---
+document.getElementById('dev-stimpak').onclick = () => {
+    if (Gamestate.player && Gamestate.player.commander) {
+        Gamestate.player.commander.stimpaks++;
+        Gamestate.updateInfo();
+        if (Gamestate.logAction) Gamestate.logAction("OVERSEER OVERRIDE: +1 Stimpak added to inventory.");
+    }
+};
+
+// --- 2. DYNAMIC DEV MENU LOCKOUTS ---
+Gamestate.refreshDevMenuStatus = function() {
+    let btnHeal = document.getElementById('dev-heal');
+    let btnStimpak = document.getElementById('dev-stimpak');
+    let btnCode = document.getElementById('dev-code');
+    let btnStorm = document.getElementById('dev-storm');
+
+    let cmdrOn = document.getElementById('opt-commander') ? document.getElementById('opt-commander').checked : false;
+    let nukesOn = document.getElementById('opt-nukes') ? document.getElementById('opt-nukes').checked : false;
+    let stormsOn = document.getElementById('opt-radstorms') ? document.getElementById('opt-radstorms').checked : false;
+    
+    if (cmdrOn) {
+        if(btnHeal) { btnHeal.disabled = false; btnHeal.style.opacity = "1"; btnHeal.style.cursor = "pointer"; btnHeal.style.pointerEvents = "auto"; }
+        if(btnStimpak) { btnStimpak.disabled = false; btnStimpak.style.opacity = "1"; btnStimpak.style.cursor = "pointer"; btnStimpak.style.pointerEvents = "auto"; }
+    } else {
+        if(btnHeal) { btnHeal.disabled = true; btnHeal.style.opacity = "0.2"; btnHeal.style.cursor = "not-allowed"; btnHeal.style.pointerEvents = "none"; }
+        if(btnStimpak) { btnStimpak.disabled = true; btnStimpak.style.opacity = "0.2"; btnStimpak.style.cursor = "not-allowed"; btnStimpak.style.pointerEvents = "none"; }
+    }
+
+    if (nukesOn) {
+        if(btnCode) { btnCode.disabled = false; btnCode.style.opacity = "1"; btnCode.style.cursor = "pointer"; btnCode.style.pointerEvents = "auto"; }
+    } else {
+        if(btnCode) { btnCode.disabled = true; btnCode.style.opacity = "0.2"; btnCode.style.cursor = "not-allowed"; btnCode.style.pointerEvents = "none"; }
+    }
+
+    if (stormsOn) {
+        if(btnStorm) { btnStorm.disabled = false; btnStorm.style.opacity = "1"; btnStorm.style.cursor = "pointer"; btnStorm.style.pointerEvents = "auto"; }
+    } else {
+        if(btnStorm) { btnStorm.disabled = true; btnStorm.style.opacity = "0.2"; btnStorm.style.cursor = "not-allowed"; btnStorm.style.pointerEvents = "none"; }
+    }
+};
 Gamestate.battle = async function(country, opponent, player, i){
     let defender = document.getElementById(`${opponent.name}`); let attacker = document.getElementById(`${country.name}`);
     
@@ -3685,6 +4011,22 @@ Gamestate.fixMapTextOrder = function() {
 
 
 // Then boot the game!
+
+// Dynamic Player Name Auto-fill for Start Menu
+document.getElementById('chosen-theme')?.addEventListener('change', function(e) {
+    let leader = document.getElementById('chosen-leader');
+    let faction = document.getElementById('chosen-country');
+    if (e.target.value === 'fo3') {
+        if(leader) leader.value = "Lone Wanderer";
+        if(faction) faction.value = "Brotherhood of Steel";
+    } else if (e.target.value === 'fnv') {
+        if(leader) leader.value = "Courier Six";
+        if(faction) faction.value = "New California Republic";
+    } else if (e.target.value === 'fo4') {
+        if(leader) leader.value = "Sole Survivor";
+        if(faction) faction.value = "The Minutemen";
+    }
+});
 
 Gamestate.init();
 </script>
