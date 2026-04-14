@@ -83,6 +83,13 @@ Because the game is completely self-contained, you don't need to install anythin
 ---
 
 ## Change Log
+**v1.9 [MOBILE PORT & HOTFIXES]**
+
+- Commander Combat Adjustments: Assassinations are much harder. Troop damage to Commanders is reduced, ambushes are limited to once per turn, and entrenched Commanders require taking the territory first.
+- Advanced AI Tactics: AI commanders now retreat at 50% HP, avoid crowded territories, hold defensive chokepoints, and navigate home intelligently if stranded.
+- Turbo Mode Auto-Skip: The game now automatically advances the phase when your AP depletes.
+- Smart UI & Map Upgrades: The map perfectly renders multiple VIP stars and adds V.A.T.S. hover warnings for entrenched targets.
+- New Holotape Loaded: Added Fallout 4 (The Commonwealth) to the theme selector.
 
 **v1.8 [MOBILE PORT & HOTFIXES]**
 
