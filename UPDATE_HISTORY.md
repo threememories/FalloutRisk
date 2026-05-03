@@ -4,7 +4,7 @@ This log covers the major changes of Wasteland Conquest (index.html).
 
 ---
 
-### v2.0 [Wasteland Conquest Update]
+### v2.0 [WASTELAND CONQUEST UPDATE]
 This was a major overhaul of the game's mechanics and interface.
 - Bottle Cap Economy: Territories now produce Bottle Caps each turn. You can use these to buy troops from the recruitment terminal instead of relying only on card trades.
 - Game Mode Presets: Added several new ways to play, like Survival, Apocalypse, and Alliance Warfare. Each mode toggles different rules automatically.
