@@ -1,147 +1,95 @@
-See bottom for Change Log
+# Wasteland Conquest
 
-# RobCo OS: Strategic Simulation (Fallout Risk)
+Wasteland Conquest is a free, browser-based strategy game inspired by Risk and the Fallout universe. 
 
-Welcome to the RobCo OS Strategic Simulation. This is a completely free, browser-based tactical strategy game set in the Fallout universe. 
+**Note on Naming:** This project was formerly titled "RobCo OS: Strategic Simulation." We have officially rebranded to **Wasteland Conquest** as of the latest version. This game is an independent project and has no affiliation with the "Wasteland Conquest" mod or any other software sharing the same name.
 
-You play as a wasteland commander tasked with outmaneuvering rival factions, managing resources, and surviving environmental hazards to claim all 42 territories on the map. The game is 100% free to play, download, and modify.
+Play right now in your browser: https://linology.tech/risk/
 
-**Ready to jump into the wasteland?** Play right now in your browser at [linology.tech/risk](https://linology.tech/risk/). Linology is the official host, chosen for its safety and reliability. While other websites are free to host the game, this is the only link guaranteed to be secure and fully updated.
+(Linology is the official host, chosen for its safety and reliability. While other websites are free to host the game, this is the only link guaranteed to be secure and fully updated.)
 
----
 
-## How to Play
+### Downloading and Offline Play
+You can download the game to play offline by simply saving the `index.html` file from this repository or the live site. Please note that the game's music tracks are not included in the standalone HTML download and require an active internet connection to stream if playing from thhe main site.
 
-If you are new to the wasteland, here is exactly how a standard turn works:
-
-### 1. The Boot Sequence
-When you load the game, you will be prompted to set up your simulation. You can choose your holographic map theme (Capital Wasteland or Mojave), input your Commander's name, and select a faction color. You can also toggle environmental hazards and adjust the AI difficulty.
-
-### 2. Phase 1: Deploy
-At the start of your turn, you will receive reserve troops based on the number of territories you control. 
-* **To deploy:** Click on any territory you already own to add 1 troop to its garrison.
-* **Shortcut:** Hold the `SHIFT` key while clicking to deploy your entire reserve pool into that territory all at once.
-
-### 3. Phase 2: Combat (V.A.T.S.)
-Once your reserves are placed, you enter the Battle Phase.
-* **To attack:** Click one of your territories that has at least 2 troops in it (this highlights it). Then, click an adjacent enemy territory.
-* **Using V.A.T.S.:** Before you attack, hover your mouse over the enemy territory. The Vault-Tec Assisted Targeting System will pop up, calculating your exact mathematical probability of winning the battle based on your army size and the difficulty setting.
-* **Victory:** If you defeat the enemy, you will be prompted to type in exactly how many troops you want to move into the newly conquered land. (You must leave at least 1 troop behind to guard your staging area).
-
-### 4. Phase 3: Maneuver
-When you are finished attacking, you may make **one** tactical maneuver before ending your turn.
-* **To maneuver:** Click a territory you own, then click another connected territory you own. You will be prompted to type in how many troops you want to shuffle between them to reinforce your borders.
-
-### 5. Managing Bottle Caps
-Every turn you successfully conquer at least one territory, you earn a Bottle Cap card. 
-* Click "Open Stash" on the left panel to view your Caps. 
-* If you collect 3 of the same kind, or 1 of each unique kind, the Stash button will glow. You can trade these Caps in for a massive influx of reserve troops.
-* **Pro-Tip:** If you completely wipe an enemy faction off the map, you instantly steal their entire unspent Cap stash!
+### Source Code and Support
+The source code is hosted at https://github.com/threememories/FalloutRisk/. 
+If you find a bug, have a feature request, or want to suggest a balance change, please submit them via the **GitHub Issues** page.
 
 ---
 
-## Features & Mechanics
+## Features
 
-* **Authentic Terminal UI:** Dynamic CRT scanlines, glowing text, and an interactive Pip-Boy style navigation menu.
-* **Radstorms:** Unpredictable radioactive weather fronts. You will get a warning before they touch down and wipe out 10-25% of troops caught in the blast zone.
-* **Wild Ghouls:** Unclaimed territories are occupied by feral ghouls. They possess a defensive bonus and will dynamically multiply across the map on higher difficulty settings.
-* **Pip-Boy Radio:** A built-in frequency scanner to play wasteland tracks while you strategize. *(Note: Requires local MP3 files to function).*
-* **Version History:** An animated, pausing telemetry ticker logging all major patches and updates directly in the terminal menu.
+### Combat and V.A.T.S.
+The game uses a V.A.T.S. interface to handle battles. Before you attack, the system shows your win probability based on troop counts and your chosen difficulty (Easy, Normal, or Hard).
 
----
+### Game Modes
+You can play with standard Risk rules or use presets to change how the game works:
 
-## How It Was Made
+*   Classic Conquest: Normal Risk rules. No special hazards or heroes. Uses simple card-trading for extra troops.
+*   Wasteland Survival: Adds Fog of War, radstorms, and feral ghouls. You'll need to manage Bottle Caps to buy reinforcements.
+*   Heroes of the Wasteland: Enables unique Faction Perks and Commander units. If your Commander dies, you lose.
+*   Apocalypse Now: A high-difficulty mode with frequent hazards and nuclear weapons enabled.
+*   Alliance Warfare: You start with a permanent ally. You win or lose together by coordinating attacks and defense.
+*   Covert Warfare: Focuses on stealth. Maximum Fog of War and faction perks that help you move unseen.
+*   Nuclear Option: A race to find launch codes and take control of silos to wipe out enemy garrisons.
+*   Custom Rules: Mix and match any of the above settings.
 
-This project was built entirely using standard web technologies: HTML, CSS, and JavaScript. It does not require a database, a backend server, or any complex installation—everything runs directly inside your web browser. 
+### Economy
+Instead of just trading cards, most modes use a Bottle Cap economy. You earn caps from your territories each turn and spend them to recruit troops, hire mercenaries, or bribe other factions.
 
-The game started as a fork of the open-source HTML5 Canvas Risk Game originally developed by Vinayak Vedantam. 
+### Commander units
+Assign a Commander to your army. They have their own HP and AP (Action Points) and provide combat bonuses. Keep them alive—losing your leader ends your game.
 
-To transform it into a robust Fallout-themed experience, I collaborated with an AI (Google Gemini) as a coding partner. Through guided prompt engineering, we overhauled the core engine to inject dynamic game loops, rewrite the combat math (implementing Gambler's Ruin algorithms for the V.A.T.S. targeting), design the CSS terminal aesthetics, and build out complex features like the roaming Radstorms and automated AI behavior. 
+### Nukes (Scorched Earth)
+Control Nuclear Silos and find 4 hidden launch codes to gain access to nukes. You can use them to clear out enemy territories or take out rival Commanders.
 
----
-
-## Download & Installation
-
-Because the game is completely self-contained, you don't need to install anything to play it. 
-
-1. Open the `index.html` file in your browser.
-2. To save the game to your computer for offline play, simply right-click the page and select **Save As...**, making sure to save it as a "Webpage, Single File" or `.html`.
-
-*(If you want the Pip-Boy Radio to work locally, place the MP3 files in the same folder as the HTML file.*
-
----
-
-## Support & Feedback
-
-* **Submit Bug Reports:** Find a glitch in the code? Send an email to [threememories@yahoo.com](mailto:threememories@yahoo.com?subject=RobCo%20OS%20Bug%20Report).
-* **Survival Field Manual:** If you enjoy surviving this digital wasteland, consider supporting the creator by checking out the real-world field manual: [SurvivalSOS: Fundamentals of Survival by Joseph Howard](https://www.amazon.com/SurvivalSOS-Fundamentals-Survival-Joseph-Howard/dp/B09TZ4WXZC).
+### Hazards and Random Events
+The map isn't static. 
+*   Radstorms: Radioactive clouds that move across the map and kill a percentage of troops.
+*   Wild Ghouls: Neutral territories can spawn ghouls that multiply if you don't clear them out.
+*   Encounters: Randomly discover abandoned Vaults or radio signals that give you items like Bobbleheads or Stimpaks.
 
 ---
 
-**Disclaimer:** This is an independent, fan-made project. It is not affiliated with, endorsed by, or sponsored by Bethesda Softworks, Bethesda Game Studios, or any entities associated with the Fallout franchise.
+## Factions and Perks
+There are 18 factions available (including custom options), each with a unique gameplay bonus:
+
+*   **Brotherhood of Steel**: Power Armor Infantry (+5% win chance in all combat).
+*   **The Enclave**: Vertibird Assault (Move troops between any two owned territories during Maneuver).
+*   **Vault 87 Mutants**: F.E.V. Infection (25% of defeated enemies convert to your troops on conquest).
+*   **Wasteland Raiders**: Chem Frenzy (Sacrifice troops for a massive combat bonus).
+*   **BOS Outcasts**: Technology Overdrive (Spend Caps to grant all attacking armies +10% win chance).
+*   **Reilly's Rangers**: Ranger Network (Defensive bonus for connected friendly territories).
+*   **New California Republic**: Logistical Superiority (+50% troop bonus for holding continents).
+*   **Caesar's Legion**: Scourge of the East (Move all surviving troops after conquest, no 1-troop minimum).
+*   **New Vegas Securitrons**: Predictive Simulation (Undo failed attacks and restore all lost troops).
+*   **Mojave Brotherhood**: Elder's Edict (Lock down a territory from all actions/attacks for 3 turns).
+*   **Great Khans**: Guerrilla Tactics (Pass through one enemy territory during Maneuver, inflicting damage).
+*   **The Fiends**: Chem-Fueled Raids (30% chance to steal caps/items or enslave survivors on conquest).
+*   **The Minutemen**: Mercenary Contracts (Spend caps to instantly deploy bonus troops to reserves).
+*   **The Institute**: Synth Replacements (Lost troops have a chance to respawn in your reserves).
+*   **The Railroad**: Rapid Relocation (Receive 5 separate troop movements during Maneuver).
+*   **The Gunners**: Mercenary Contracts (Fast-cooldown version of the Minutemen perk).
+*   **Nuka-World Raiders**: Tribute Chest (Bonus Bottle Caps for every continent controlled).
+*   **Custom Faction**: Mysterious Stranger (Occasional automatic re-rolls or enemy negation in losing battles).
 
 ---
 
-## Change Log
-**v1.9 [MOBILE PORT & HOTFIXES]**
+## Saving and Loading
+Strategic progress can be saved at any time using the **Save Holotape**, which downloads your current game state as a JSON file. To resume your conquest, use the **Load Holotape** option to upload your saved file back into the terminal.
 
-- Commander Combat Adjustments: Assassinations are much harder. Troop damage to Commanders is reduced, ambushes are limited to once per turn, and entrenched Commanders require taking the territory first.
-- Advanced AI Tactics: AI commanders now retreat at 50% HP, avoid crowded territories, hold defensive chokepoints, and navigate home intelligently if stranded.
-- Turbo Mode Auto-Skip: The game now automatically advances the phase when your AP depletes.
-- Smart UI & Map Upgrades: The map perfectly renders multiple VIP stars and adds V.A.T.S. hover warnings for entrenched targets.
-- New Holotape Loaded: Added Fallout 4 (The Commonwealth) to the theme selector.
+---
 
-**v1.8 [MOBILE PORT & HOTFIXES]**
+## Mobile Support
+The simulation is not yet fully mobile-friendly, but responsive layout updates are currently in progress. It is currently best played on a desktop or in Landscape Mode on larger mobile devices.
 
-- Hardware Port: RobCo OS now natively supports handheld (mobile) terminals. Device must be rotated to Landscape mode to initialize.
-- Threat Patch: Resolved a logic error preventing the Wild Ghouls subsystem from properly infesting unclaimed sectors at boot.
-- The Status and Directive terminal readouts have been completely overhauled.
-- Commanders now receive heavy home-turf damage resistance and can flip enemy territories after a ten-phase siege.
-- When a faction's Commander is killed, their entire empire completely collapses into unowned, neutral wasteland.
-- Wasteland diplomacy dynamically scales Ceasefire negotiations, trading exact Bottle Cap amounts for equal rounds of peace.
-- The interface and map graphics have been optimized to provide a more stable, readable, and streamlined visual experience during gameplay.
-- Shout-out to Alex for helping me debug.
+---
 
-**v1.7 [SCORCHED EARTH & COMMANDERS]**
+## Credits
+*   **Developer**: threememories
+*   **Inspiration**: Fallout (Bethesda) and Risk (Hasbro).
+*   **ORIGINAL ENGINE ARCHITECTURE**: This simulation was heavily modified from the original Risk framework created by Vinayak Vedantam (https://github.com/vvedanta).
+*   **License**: Open Source. Feel free to host or modify the code.
 
-- Scorched Earth: Optional Nuke Protocol. Secure Launch Codes and hold highly-defensible Command Silos to unleash permanent radiation.
-- Commander Protocol: Each faction is led by a VIP (100 HP). If they die, you lose. Manage AP, Stimpaks, and map movement to survive.
-- Wasteland Diplomacy: Implemented the ability to offer Caps to rivals for a 3-Round Ceasefire.
-- Wasteland Karma: Breaking a truce now incurs a permanent "Betrayal Tax" and triggers retaliatory AI Spite Alliances.
-
-**v1.6 [SECURITY & UI PROTOCOLS]**
-
-- Anti-Hacking Patch: Implemented advanced input sanitization to block malicious code injection at the boot terminal.
-- OS Version History: Initialized scrolling telemetry window to track simulation patch notes.
-
-**v1.5 [SYSTEMS UPGRADE]**
-
-- V.A.T.S. Upgrade: Hover targeting now utilizes Gambler's Ruin algorithms to calculate total victory probability (capped at 95%).
-- Customization: Faction color override matrix added to Boot Sequence.
-- Cap Economy: Reserve pool expanded to 50, featuring dynamic "Wasteland Salvage" forging.
-- UI Refinement: Overhauled the Survival Guide into a compact, tactical layout.
-
-**v1.4 [COMBAT & LOOT PROTOCOLS]**
-
-- Tactical Routing: Commanders may now dictate exact troop garrison sizes post-victory.
-- Wasteland Justice: Eradicating a rival faction now instantly transfers their entire Cap stash to your inventory.
-- Neutral Threat: Feral Ghouls now dynamically multiply based on active simulation difficulty.
-- Logistics: "Fixed Reinforcements" (Always 3) trade rule added to boot options.
-
-**v1.3 [ENVIRONMENTAL HAZARDS]**
-
-- Meteorology: Radstorms added to the simulation.
-- Fauna: Wild Ghouls (Neutral Threat) optional hazard integrated into the map.
-- Comms: Pip-Boy Wasteland Radio frequency scanner initialized.
-
-**v1.2 [HOLOTAPE INTERFACE]**
-
-- Telemetry: Vault-Tec Action Log implemented for real-time combat and event tracking.
-- Immersion: Randomized wasteland encounter logs integrated into the turn cycle.
-- System Clock: Holiday protocol initialized to trigger date-specific wasteland encounters.
-- UI: Dynamic HP (Territorial Health) and AP (Action Point) tracking gauges added to the Commander's dashboard.
-- Performance: Turbo Mode toggle added to bypass V.A.T.S. rendering for accelerated AI processing.
-
-**v1.1 [PIP-BOY SCREEN AND UI]**
-
-- Themes: Capital Wasteland and Mojave holographic overlays loaded.
+War... War never changes.
