@@ -6,15 +6,19 @@ Wasteland Conquest is a free, browser-based strategy game inspired by Risk and t
 
 Play right now in your browser: https://linology.tech/risk/
 
-(Linology is the official host, chosen for its safety and reliability. While other websites are free to host the game, this is the only link guaranteed to be secure and fully updated.)
+*Linology is the official host, chosen for its safety and reliability. While other websites are free to host the game, this is the only link guaranteed to be secure and fully updated.*
 
 
 ### Downloading and Offline Play
 You can download the game to play offline by simply saving the `index.html` file from this repository or the live site. Please note that the game's music tracks are not included in the standalone HTML download and require an active internet connection to stream if playing from thhe main site.
 
 ### Source Code and Support
-The source code is hosted at https://github.com/threememories/FalloutRisk/. 
-If you find a bug, have a feature request, or want to suggest a balance change, please submit them via the **GitHub Issues** page.
+The primary source code for this project is hosted on GitHub: https://github.com/threememories/FalloutRisk/
+
+A mirrored backup of the repository is maintained at: https://git.linology.tech/threememories/FalloutRisk
+
+The mirror exists for redundancy and archival purposes. All active development and updates are performed on the GitHub repository.
+If you find a bug, have a feature request, or want to suggest a balance change, please submit them via the [Issues](https://github.com/threememories/FalloutRisk/issues) page.
 
 ---
 
