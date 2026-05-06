@@ -22,61 +22,73 @@ If you find a bug, have a feature request, or want to suggest a balance change, 
 
 ---
 
-## Features
+## **Features**
 
-### Combat and V.A.T.S.
-The game uses a V.A.T.S. interface to handle battles. Before you attack, the system shows your win probability based on troop counts and your chosen difficulty (Easy, Normal, or Hard).
+### **Combat and V.A.T.S.**
+The game uses a V.A.T.S. interface to handle battles. Before you attack, the system shows your win probability based on troop counts, environmental hazards, and your chosen difficulty (Easy, Normal, or Hard). An integrated **Vault-Tec Action Log** tracks all combat, though events happening inside the Fog of War will be scrambled into vague "Sensor Anomalies."
 
-### Game Modes
+### **Game Modes**
 You can play with standard Risk rules or use presets to change how the game works:
+* **Classic Conquest:** Normal Risk rules. No special hazards or heroes. Uses simple card-trading for extra troops.
+* **Wasteland Survival:** Adds Fog of War, radstorms, and feral ghouls. You'll need to manage Bottle Caps to buy reinforcements.
+* **Heroes of the Wasteland:** Enables unique Faction Perks and Commander units. If your Commander dies, you lose.
+* **Apocalypse Now:** A high-difficulty mode with frequent hazards and nuclear weapons enabled.
+* **Alliance Warfare:** You start with a permanent ally. You win or lose together. Features unique abilities like **Emergency Asylum**, **Vertibird Airlifts** for landlocked troops, and a **Signal Ally** menu to coordinate strikes.
+* **Covert Warfare:** Focuses on stealth. Maximum Fog of War and faction perks that help you move unseen.
+* **Nuclear Option:** A race to find launch codes and take control of silos to wipe out enemy garrisons.
+* **Custom Rules:** Mix and match any of the above settings.
 
-*   Classic Conquest: Normal Risk rules. No special hazards or heroes. Uses simple card-trading for extra troops.
-*   Wasteland Survival: Adds Fog of War, radstorms, and feral ghouls. You'll need to manage Bottle Caps to buy reinforcements.
-*   Heroes of the Wasteland: Enables unique Faction Perks and Commander units. If your Commander dies, you lose.
-*   Apocalypse Now: A high-difficulty mode with frequent hazards and nuclear weapons enabled.
-*   Alliance Warfare: You start with a permanent ally. You win or lose together by coordinating attacks and defense.
-*   Covert Warfare: Focuses on stealth. Maximum Fog of War and faction perks that help you move unseen.
-*   Nuclear Option: A race to find launch codes and take control of silos to wipe out enemy garrisons.
-*   Custom Rules: Mix and match any of the above settings.
+### **Economy & Diplomacy**
+Instead of just trading cards, most modes use a Bottle Cap economy. You earn caps from your territories each turn and spend them to recruit troops, hire mercenaries, or engage in wasteland politics. 
+* **Negotiations:** Send Envoys to offer Caps or troops in exchange for a temporary Ceasefire (limited to 1 active Truce at a time).
+* **Extortion:** If your army dwarfs your neighbor, demand tribute to force a "Locked" Extortion Truce.
+* **Betrayal:** Breaking a ceasefire early incurs a permanent Betrayal Tax and triggers a global "Spite Bounty," causing AI factions to aggressively target you.
 
-### Economy
-Instead of just trading cards, most modes use a Bottle Cap economy. You earn caps from your territories each turn and spend them to recruit troops, hire mercenaries, or bribe other factions.
+### **Commander Units**
+Assign a Commander to your army. They have their own HP and AP (Action Points) and provide massive 20% defensive combat bonuses to their stationed territory. Keep them alive—losing your leader ends your game.
+* **Convert Territory:** Commanders can spend AP to initiate a 3-turn siege to flip an enemy territory to your control.
+* **Looting:** Defeating an enemy Commander allows you to loot their held Stimpaks and Bobbleheads.
 
-### Commander units
-Assign a Commander to your army. They have their own HP and AP (Action Points) and provide combat bonuses. Keep them alive—losing your leader ends your game.
+### **Nukes (Scorched Earth)**
+Control Nuclear Silos and find 4 hidden launch codes to gain access to nukes. You can use them to clear out enemy territories or vaporize rival Commanders.
+* **Collateral Damage:** Nuclear strikes instantly destroy all units at ground zero, while inflicting 50% casualties and severe radiation to all adjacent territories.
+* **Disruption:** A nuclear launch takes 3 turns to impact. You can abort an enemy's launch sequence by capturing their specific origin silo before the timer expires.
 
-### Nukes (Scorched Earth)
-Control Nuclear Silos and find 4 hidden launch codes to gain access to nukes. You can use them to clear out enemy territories or take out rival Commanders.
+### **Hazards and Random Events**
+The map isn't static.
+* **Radstorms:** Radioactive clouds that move across the map and kill a percentage of troops.
+* **Wild Ghouls:** Neutral territories can spawn ghouls that multiply if you don't clear them out.
+* **Encounters:** Randomly discover abandoned Vaults or radio signals to find Caps, Stimpaks, or powerful **Bobbleheads** (which sit in your 'INV' tab and can be activated for massive 1-turn buffs).
 
-### Hazards and Random Events
-The map isn't static. 
-*   Radstorms: Radioactive clouds that move across the map and kill a percentage of troops.
-*   Wild Ghouls: Neutral territories can spawn ghouls that multiply if you don't clear them out.
-*   Encounters: Randomly discover abandoned Vaults or radio signals that give you items like Bobbleheads or Stimpaks.
+### **RobCo OS Terminal & UI**
+* **Save/Load System:** Export your current simulation to a local JSON file (Holotape) to resume your conquest later.
+* **Survival Guide:** A fully immersive, multi-page RobCo Terminal acts as the game's manual, dynamically typing out rules and storing patch notes.
+* **Mobile Support:** The UI dynamically shifts to support landscape-oriented mobile browsers.
+* **Turbo Mode:** A toggle to vastly accelerate AI turns and skip animations.
 
 ---
 
-## Factions and Perks
+## **Factions and Perks**
 There are 18 factions available (including custom options), each with a unique gameplay bonus:
 
-*   **Brotherhood of Steel**: Power Armor Infantry (+5% win chance in all combat).
-*   **The Enclave**: Vertibird Assault (Move troops between any two owned territories during Maneuver).
-*   **Vault 87 Mutants**: F.E.V. Infection (25% of defeated enemies convert to your troops on conquest).
-*   **Wasteland Raiders**: Chem Frenzy (Sacrifice troops for a massive combat bonus).
-*   **BOS Outcasts**: Technology Overdrive (Spend Caps to grant all attacking armies +10% win chance).
-*   **Reilly's Rangers**: Ranger Network (Defensive bonus for connected friendly territories).
-*   **New California Republic**: Logistical Superiority (+50% troop bonus for holding continents).
-*   **Caesar's Legion**: Scourge of the East (Move all surviving troops after conquest, no 1-troop minimum).
-*   **New Vegas Securitrons**: Predictive Simulation (Undo failed attacks and restore all lost troops).
-*   **Mojave Brotherhood**: Elder's Edict (Lock down a territory from all actions/attacks for 3 turns).
-*   **Great Khans**: Guerrilla Tactics (Pass through one enemy territory during Maneuver, inflicting damage).
-*   **The Fiends**: Chem-Fueled Raids (30% chance to steal caps/items or enslave survivors on conquest).
-*   **The Minutemen**: Mercenary Contracts (Spend caps to instantly deploy bonus troops to reserves).
-*   **The Institute**: Synth Replacements (Lost troops have a chance to respawn in your reserves).
-*   **The Railroad**: Rapid Relocation (Receive 5 separate troop movements during Maneuver).
-*   **The Gunners**: Mercenary Contracts (Fast-cooldown version of the Minutemen perk).
-*   **Nuka-World Raiders**: Tribute Chest (Bonus Bottle Caps for every continent controlled).
-*   **Custom Faction**: Mysterious Stranger (Occasional automatic re-rolls or enemy negation in losing battles).
+* **Brotherhood of Steel**: Power Armor Infantry (+5% win chance in all combat).
+* **The Enclave**: Vertibird Assault (Move troops between any two owned territories during Maneuver).
+* **Vault 87 Mutants**: F.E.V. Infection (25% of defeated enemies convert to your troops on conquest).
+* **Wasteland Raiders**: Chem Frenzy (Sacrifice troops for a massive combat bonus).
+* **BOS Outcasts**: Technology Overdrive (Spend Caps to grant all attacking armies +10% win chance).
+* **Reilly's Rangers**: Ranger Network (Defensive bonus for connected friendly territories).
+* **New California Republic**: Logistical Superiority (+50% troop bonus for holding continents).
+* **Caesar's Legion**: Scourge of the East (Move all surviving troops after conquest, no 1-troop minimum).
+* **New Vegas Securitrons**: Predictive Simulation (Undo failed attacks and restore all lost troops).
+* **Mojave Brotherhood**: Elder's Edict (Lock down a territory from all actions/attacks for 3 turns).
+* **Great Khans**: Guerrilla Tactics (Pass through one enemy territory during Maneuver, inflicting damage).
+* **The Fiends**: Chem-Fueled Raids (30% chance to steal caps/items or enslave survivors on conquest).
+* **The Minutemen**: Mercenary Contracts (Spend caps to instantly deploy 6-12 elite troops to reserves).
+* **The Institute**: Synth Replacements (Lost troops have a 10% chance to respawn in your reserves).
+* **The Railroad**: Rapid Relocation (Receive 5 separate troop movements during Maneuver).
+* **The Gunners**: Mercenary Contracts (Fast-cooldown version of the Minutemen perk).
+* **Nuka-World Raiders**: Tribute Chest (+10 Bottle Caps for every continent controlled).
+* **Custom Faction**: Mysterious Stranger (When projected to lose a battle, the Stranger may appear and grant a sudden +25% combat bonus).
 
 ---
 
