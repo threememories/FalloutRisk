@@ -2,9 +2,22 @@
 
 This log covers the major changes of Wasteland Conquest (index.html).
 
+### **v2.1 [ALLIANCE, DIPLOMACY & COMBAT EVOLUTION]**
+
+* **Alliance Warfare Expansion:** Added the 'Signal Ally' menu to request coordinated strikes, reinforcements, or Emergency Asylum. Landlocked troops can now be airlifted across allied territory via Vertibird.
+* **Advanced Diplomacy & Extortion:** Factions are now strictly limited to 1 active truce. Demanding Caps without a fair trade creates a 'Locked' Extortion Truce that cannot be backstabbed. The AI will now proactively offer truces and extort weaker neighbors.
+* **Commander Conversions & Combat:** Commanders can now spend AP to convert enemy territories (a 3-turn siege). Turn phase order has been updated to prioritize Battles before Commander movement. Defeated factions now drop their Stimpaks and Bobbleheads to the victor.
+* **Scorched Earth Disruption:** Active nuclear launches can now be aborted by capturing the specific origin silo before impact. Added a flashing crosshair to targeted territories and full-screen warning modals for aborts. Nuke codes now have escalating drop rates.
+* **The 'logFog' Engine:** The Vault-Tec Action Log is now fully integrated with Fog of War. Battles and troop movements in hidden sectors will display as scrambled 'Sensor Anomalies'.
+* **V.A.T.S. & UI Polish:** VATS now accurately warns of environmental hazards, locked truces, and Commander defense buffs. The 'INV' tab logic has been overhauled to only pulse when items are immediately usable. The Survival Guide now natively hosts patch notes.
+* **Faction Balance Pass:** Minutemen/Gunners now spawn 6-12 troops. BOS Outcasts' Overdrive cost is capped at 30 Caps. Nuka-World Raiders tribute increased to +10 Caps.
+* **Major Bug Fixes:** Fixed soft-locks with converting Commanders, resolved Agility Bobblehead maneuver limits, corrected multi-commander duel targeting, and ensured Bobblehead cooldowns reset when stolen.
+
+
 ---
 
 ### v2.0 [WASTELAND CONQUEST UPDATE]
+
 This was a major overhaul of the game's mechanics and interface.
 - Bottle Cap Economy: Territories now produce Bottle Caps each turn. You can use these to buy troops from the recruitment terminal instead of relying only on card trades.
 - Game Mode Presets: Added several new ways to play, like Survival, Apocalypse, and Alliance Warfare. Each mode toggles different rules automatically.
