@@ -4,11 +4,11 @@ This log covers the major changes of Wasteland Conquest (index.html).
 
 ## v2.2 [System Hotfixes & UI Polish]
 
-**Classic Mode Fix:** Fixed a critical open stash bug in Classic mode.
-**AP Bar Ping:** Added a ping function to the AP bar to easily locate valid territories.
-**Dynamic Cursor:** Added a no-action cursor to visually indicate when actions are unavailable.
-**Hover UI Fix:** Fixed modal button text colors blending into the background when hovered over.
-**AI & Perk Logic:** Fixed several logic bugs regarding Faction Perks and Bobbleheads for both Player and AI.and AI.
+* ***Classic Mode Fix:** Fixed a critical open stash bug in Classic mode.
+* ***AP Bar Ping:** Added a ping function to the AP bar to easily locate valid territories.
+* **Dynamic Cursor:** Added a no-action cursor to visually indicate when actions are unavailable.
+* **Hover UI Fix:** Fixed modal button text colors blending into the background when hovered over.
+* **AI & Perk Logic:** Fixed several logic bugs regarding Faction Perks and Bobbleheads for both Player and AI.and AI.
 
 ---
 
