@@ -2,6 +2,16 @@
 
 This log covers the major changes of Wasteland Conquest (index.html).
 
+## v2.2 [System Hotfixes & UI Polish]
+
+* Fixed a critical open stash bug in Classic mode.
+* Added a ping function to the AP bar to locate valid territories.
+* Added a no-action cursor to indicate when actions are unavailable.
+* Fixed modal button text colors blending into the background on hover.
+* Fixed several logic bugs regarding Faction Perks and Bobbleheads for both Player and AI.
+
+---
+
 ### **v2.1 [ALLIANCE, DIPLOMACY & COMBAT EVOLUTION]**
 
 * **Alliance Warfare Expansion:** Added the 'Signal Ally' menu to request coordinated strikes, reinforcements, or Emergency Asylum. Landlocked troops can now be airlifted across allied territory via Vertibird.
