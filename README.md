@@ -98,7 +98,7 @@ Strategic progress can be saved at any time using the **Save Holotape**, which d
 ---
 
 ## Mobile Support
-The simulation is not yet fully mobile-friendly, but responsive layout updates are currently in progress. It is currently best played on a desktop or in Landscape Mode on larger mobile devices.
+The simulation fully mobile-friendly and responsive. It is best played on a desktop or in Landscape Mode on larger mobile devices, but still very playable on small screens and mobile devices.
 
 ---
 
