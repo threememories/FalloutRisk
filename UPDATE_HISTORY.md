@@ -2,6 +2,18 @@
 
 This log covers the major changes of Wasteland Conquest (index.html).
 
+
+## v2.3 [Leveling & Mobile Update]
+
+* **Progression Overhaul:** Implemented a new player leveling system featuring uncapped XP for continuous character growth.
+* **Mobile Deployment:** Completely overhauled the mobile interface with adaptive UI scaling and a specialized mission log for small screens.
+* **Artifact Database:** Integrated Bobbleheads and Relics into the core simulation with active perks and inventory tracking.
+* **Biometric Monitor:** Added a dynamic Vault-Boy biometric display to the terminal that visually updates based on commander health.
+* **Stability Fixes:** Resolved several critical logic bugs including AI turn lockups, SVG map layering, and script crashes.
+* **Mode Balance:** Balanced specialized mechanics like Nukes and Radstorms to ensure consistency across all game modes.
+
+---
+
 ## v2.2 [System Hotfixes & UI Polish]
 
 * **Classic Mode Fix:** Fixed a critical open stash bug in Classic mode.
