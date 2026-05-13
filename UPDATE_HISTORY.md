@@ -2,15 +2,18 @@
 
 This log covers the major changes of Wasteland Conquest (index.html).
 
-## v2.4 [Arsenal & Intelligence Update]
+## v2.4 [THE COMPANION & COGNITION UPDATE]
 
-* **Companion System:** Added a rare, multi-stage quest to find and rescue Dogmeat. Players can choose to take him in an 'Injured' state (which incurs debuffs) or heal him with resources to unlock powerful combat, loot-nding, and mine-defusing buffs.
+* **New Companion System (Dogmeat):** Added a rare, multi-stage quest to find and rescue Dogmeat. Players can choose to take him in an 'Injured' state (which incurs debuffs) or heal him with resources to unlock powerful combat, loot-finding, and mine-defusing buffs.
 * **Scorched Earth Overhaul:** Ground Zero is no longer permanently destroyed. Nuked territories now suffer severe, 10-turn radiation attrition (80% initial losses) that slowly cools off. The launch engine now supports simultaneous nuclear strikes from multiple factions.
-* **V.A.T.S. Intelligence:** The V.A.T.S. tooltip now displays high-visibility warning banners explaining exactly why a tactical action is blocked (e.g., 'OUT OF RANGE', 'TERRITORY FROZEN SOLID'). It also tracks active nuclear impact countdowns.
-* **Relic & Arsenal Polish:** Fat Man and Cryolator strikes are now strictly limited to a range of 3 territories from your borders. Added theme-colored map icons for planted Mines, Frozen zones, Blockades, and active Expeditions.
-* **Progression & Leveling:** The Level-Up system has been refined to prevent offering duplicate non-stackable perks and now clearly labels upgrades for stackable abilities (e.g., Rank 2, Rank 3).
-* **QoL & System Logic:** RadAway now explicitly grants immunity to Nuke Fallout in addition to weather Radstorms, complete with UI and action log feedback. Bobblehead activations are now strictly phase-locked to prevent accidental wasted uses.
-* **Encounter & Map Polish:** Increased the discovery rate of radio transmissions and post-battle expeditions. Cleaned up legacy SVG map text artifacts.
+* **V.A.T.S. Action Validator:** V.A.T.S. now displays high-visibility warning banners explaining exactly why a tactical action is blocked (e.g., 'OUT OF RANGE', 'TERRITORY FROZEN SOLID'). It also tracks active nuclear impact countdowns.
+* **Advanced Relic Targeting:** Fat Man and Cryolator strikes are now strictly limited to a range of 3 territories from your borders. Added theme-colored map icons for planted Mines, Frozen zones, Blockades, and active Expeditions.
+* **Progression Polish:** The Level-Up system has been refined to prevent offering duplicate non-stackable perks, and now clearly labels upgrades for stackable abilities (e.g., Rank 2, Rank 3).
+* **Deployment Protocols:** Introduced Classic Manual and Semi-Auto initial placement phases to the boot menu for deep strategic starts.
+* **Advanced AI Brain:** Artificial Intelligence rewritten to prevent suicidal attacks, aggressively consolidate continents, perform continuous 'Blitz' sweeps, and utilize cooldown-based perks multiple times.
+* **Relic & Hazard Parity:** Wasteland Relics now function as intended. Jet grants an extra turn, Stealth Boys hide your territories from AI radar, the G.E.C.K. clears Radstorms, and RadAway properly blocks weather attrition.
+* **Tactical Backbriefs:** Turbo Mode now generates a dynamic, immersive intelligence summary at the end of the AI cycle instead of clogging the action log with AI-vs-AI combat spam.
+* **Wasteland Fixes:** Added Maxson's Brotherhood (FO4), resolved the 'Missing Caps' truce bug, and ensured AI respects Cryolator freezes and Silver Shroud blockades.
 
 ---
 
