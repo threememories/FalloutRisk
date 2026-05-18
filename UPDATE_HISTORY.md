@@ -2,6 +2,18 @@
 
 This log covers the major changes of Wasteland Conquest (index.html).
 
+## v2.4.1 [HOTFIX & STABILITY UPDATE]
+
+* **Ghost Factions Fixed:** Fixed critical bugs where factions eliminated by environmental damage or Commander duels remained active as 'ghosts', preventing the game from ending.
+* **Phantom Perks:** Eliminated factions can no longer trigger passive abilities (like Prydwen drops) from the grave.
+* **Trespassing AP:** Fixed an issue where players received 0 Action Points when a lone enemy Commander trespassed on a fully conquered map.
+* **Encounter Exploit:** Random encounters are no longer tied to map clicks to prevent spamming; they now trigger naturally during phase transitions.
+* **Developer Tools:** Added a comprehensive 'Bug Reporting' guide to the RobCo Terminal to assist players in exporting and submitting technical diagnostics.
+* **Diagnostics:** Embedded 500-line technical logs into save files and added a diagnostic export tool for easier bug tracking.
+* **Wasteland Radio:** Added fail-safes for missing MP3 files. The Pip-Boy will now skip dead frequencies with thematic static and automatically power down if no audio files are detected.
+
+---
+
 ## v2.4 [THE COMPANION & COGNITION UPDATE]
 
 * **New Companion System (Dogmeat):** Added a rare, multi-stage quest to find and rescue Dogmeat. Players can choose to take him in an 'Injured' state (which incurs debuffs) or heal him with resources to unlock powerful combat, loot-finding, and mine-defusing buffs.
